@@ -216,8 +216,11 @@ static NSArray *states;
                             complete(flag);
                         }
                     } else {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                        [alert show];
+                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+                        [alert addAction:okAction];
+                        
+                        [[self topMostController] presentViewController:alert animated:YES completion:nil];
                     }
                 });
             }];
@@ -229,6 +232,17 @@ static NSArray *states;
             complete(nil);
         }
     }
+}
+
+- (UIViewController*)topMostController
+{
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    //NSLog(@"Top View is: %@",NSStringFromClass([topController class]));
+    return topController;
 }
 
 /**

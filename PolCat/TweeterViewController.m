@@ -17,6 +17,9 @@
  *  @brief A loading overlay view for the table. Will be running while data is being fetched off in the background.
  */
 @property (nonatomic, weak) IBOutlet UIView *loadingView;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *filterBarButtonItem;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *settingsBarButtonItem;
+
 /**
  *  @brief The embedded UITableViewController subclass that will be in charge of displaying the data.
  */
@@ -50,6 +53,12 @@
     // This notification is fired in the AppDelegate once the app tries to handle a custom URL fired off by the
     //  webview context during OAuth.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAuthenticateCallback:) name:@"UserAuthCallbackNotification" object:nil];
+    
+    
+    self.settingsBarButtonItem.title = @"\u2699";
+    UIFont *f1 = [UIFont fontWithName:@"Helvetica" size:24.0];
+    NSDictionary *dict = @{NSFontAttributeName:f1};
+    [self.settingsBarButtonItem setTitleTextAttributes:dict forState:UIControlStateNormal];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -124,6 +133,16 @@
     
 }
 
+-(IBAction)handleFilterBarButtonAction:(id)sender
+{
+    
+}
+
+-(IBAction)handleSettingsBarButtonAction:(id)sender
+{
+    
+}
+
 /**
  *  @brief The handler method for when the UserAuthCallbackNotification is fired in the app delegate.
  *  @discussion Handle the success/error of the authorizaton phase and respond as needed.
@@ -137,8 +156,11 @@
             if (!error) {
                 [self userLoggedIn:userName userID:userId];
             } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [alert show];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+                [alert addAction:okAction];
+                [self presentViewController:alert animated:YES completion:nil];
+                return;
             }
             // Now tell the OAuth view controller that it can start its unwind to exit seque.
             [self.auth performSegueWithIdentifier:@"FlickrOAuthUnwindSegue" sender:self];

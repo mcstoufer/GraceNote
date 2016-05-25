@@ -25,6 +25,8 @@
 		C77576991CF4FF7800A26413 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C77576981CF4FF7800A26413 /* Accounts.framework */; };
 		C775769C1CF63E7500A26413 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C775769B1CF63E7500A26413 /* UIColor+Additions.m */; };
 		C775769F1CF63F1E00A26413 /* RoundedCornersButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C775769E1CF63F1E00A26413 /* RoundedCornersButton.m */; };
+		C77576A31CF64F9500A26413 /* FeedFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77576A21CF64F9500A26413 /* FeedFilterViewController.m */; };
+		C77576A61CF64F9F00A26413 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77576A51CF64F9F00A26413 /* SettingsViewController.m */; };
 		C7B18EDB1CECB52300B002FE /* TweetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDA1CECB52300B002FE /* TweetImageView.m */; };
 		C7B18EDE1CECBE5900B002FE /* TweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDD1CECBE5900B002FE /* TweetStream.m */; };
 		C7B18EE11CECBE6900B002FE /* PoliticalTweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EE01CECBE6900B002FE /* PoliticalTweetStream.m */; };
@@ -66,11 +68,11 @@
 		C742F3491CEC10AA00D0B7E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C742F34B1CEC10AA00D0B7E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C742F3501CEC10AA00D0B7E2 /* PolCat.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolCat.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C742F3541CEC10AA00D0B7E2 /* GraceNoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraceNoteTests.m; sourceTree = "<group>"; };
-		C742F3561CEC10AA00D0B7E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C742F3541CEC10AA00D0B7E2 /* GraceNoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GraceNoteTests.m; path = PolCatTests/GraceNoteTests.m; sourceTree = "<group>"; };
+		C742F3561CEC10AA00D0B7E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = PolCatTests/Info.plist; sourceTree = "<group>"; };
 		C742F35B1CEC10AA00D0B7E2 /* PolCat.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolCat.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C742F35F1CEC10AA00D0B7E2 /* GraceNoteUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraceNoteUITests.m; sourceTree = "<group>"; };
-		C742F3611CEC10AA00D0B7E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C742F35F1CEC10AA00D0B7E2 /* GraceNoteUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GraceNoteUITests.m; path = PolCatUITests/GraceNoteUITests.m; sourceTree = "<group>"; };
+		C742F3611CEC10AA00D0B7E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = PolCatUITests/Info.plist; sourceTree = "<group>"; };
 		C742F36D1CEC121000D0B7E2 /* TweeterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweeterTableViewCell.h; sourceTree = "<group>"; };
 		C742F36E1CEC121000D0B7E2 /* TweeterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweeterTableViewCell.m; sourceTree = "<group>"; };
 		C742F3701CEC187B00D0B7E2 /* TweeterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweeterViewController.h; sourceTree = "<group>"; };
@@ -87,6 +89,10 @@
 		C775769B1CF63E7500A26413 /* UIColor+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Additions.m"; sourceTree = "<group>"; };
 		C775769D1CF63F1E00A26413 /* RoundedCornersButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedCornersButton.h; sourceTree = "<group>"; };
 		C775769E1CF63F1E00A26413 /* RoundedCornersButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedCornersButton.m; sourceTree = "<group>"; };
+		C77576A11CF64F9500A26413 /* FeedFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedFilterViewController.h; sourceTree = "<group>"; };
+		C77576A21CF64F9500A26413 /* FeedFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedFilterViewController.m; sourceTree = "<group>"; };
+		C77576A41CF64F9F00A26413 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		C77576A51CF64F9F00A26413 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		C7B18ED91CECB52300B002FE /* TweetImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetImageView.h; sourceTree = "<group>"; };
 		C7B18EDA1CECB52300B002FE /* TweetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetImageView.m; sourceTree = "<group>"; };
 		C7B18EDC1CECBE5900B002FE /* TweetStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetStream.h; sourceTree = "<group>"; };
@@ -167,6 +173,7 @@
 		C742F3391CEC10AA00D0B7E2 /* PolCat */ = {
 			isa = PBXGroup;
 			children = (
+				C77576A01CF64F7900A26413 /* Ancillary views */,
 				C742F33D1CEC10AA00D0B7E2 /* AppDelegate.h */,
 				C742F33E1CEC10AA00D0B7E2 /* AppDelegate.m */,
 				C742F3461CEC10AA00D0B7E2 /* Assets.xcassets */,
@@ -179,8 +186,7 @@
 				C742F33A1CEC10AA00D0B7E2 /* Supporting Files */,
 				C753CA2E1CEE2D0200B0E78E /* Tweets */,
 			);
-			name = PolCat;
-			path = GraceNote;
+			path = PolCat;
 			sourceTree = "<group>";
 		};
 		C742F33A1CEC10AA00D0B7E2 /* Supporting Files */ = {
@@ -267,6 +273,17 @@
 				C753CA311CEF722C00B0E78E /* TweetDetailViewController.m */,
 			);
 			name = "Feed List";
+			sourceTree = "<group>";
+		};
+		C77576A01CF64F7900A26413 /* Ancillary views */ = {
+			isa = PBXGroup;
+			children = (
+				C77576A11CF64F9500A26413 /* FeedFilterViewController.h */,
+				C77576A21CF64F9500A26413 /* FeedFilterViewController.m */,
+				C77576A41CF64F9F00A26413 /* SettingsViewController.h */,
+				C77576A51CF64F9F00A26413 /* SettingsViewController.m */,
+			);
+			name = "Ancillary views";
 			sourceTree = "<group>";
 		};
 		DFD10644CD18D6F977AF8FCA /* Frameworks */ = {
@@ -515,6 +532,7 @@
 			files = (
 				C753CA321CEF722C00B0E78E /* TweetDetailViewController.m in Sources */,
 				C7B18EE41CED0FBA00B002FE /* Tweet.m in Sources */,
+				C77576A31CF64F9500A26413 /* FeedFilterViewController.m in Sources */,
 				C742F36F1CEC121000D0B7E2 /* TweeterTableViewCell.m in Sources */,
 				C775769F1CF63F1E00A26413 /* RoundedCornersButton.m in Sources */,
 				C753CA381CF3D4B500B0E78E /* UIImage+OvalPortrait.m in Sources */,
@@ -523,6 +541,7 @@
 				C7B18EEA1CED135F00B002FE /* NSString+Utility.m in Sources */,
 				C7B18EE71CED0FC700B002FE /* PoliticalTweet.m in Sources */,
 				C7B18EDE1CECBE5900B002FE /* TweetStream.m in Sources */,
+				C77576A61CF64F9F00A26413 /* SettingsViewController.m in Sources */,
 				C742F33F1CEC10AA00D0B7E2 /* AppDelegate.m in Sources */,
 				C7B18EDB1CECB52300B002FE /* TweetImageView.m in Sources */,
 				C742F3721CEC187B00D0B7E2 /* TweeterViewController.m in Sources */,
@@ -675,7 +694,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = GraceNote/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/PolCat/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.political.free.polcat;
 				PRODUCT_NAME = PolCat;
@@ -690,7 +709,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = GraceNote/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/PolCat/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.political.free.polcat;
 				PRODUCT_NAME = PolCat;
