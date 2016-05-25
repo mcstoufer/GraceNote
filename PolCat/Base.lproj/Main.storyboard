@@ -56,8 +56,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kRZ-bC-qQw">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kRZ-bC-qQw">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="Filters" id="A4p-Rl-ryU">
                                         <barButtonItem key="leftBarButtonItem" image="BackArrow" id="hRr-cw-dgP">
@@ -70,6 +70,11 @@
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kRZ-bC-qQw" firstAttribute="leading" secondItem="w2V-wh-zel" secondAttribute="leading" id="7id-Gi-jsi"/>
+                            <constraint firstAttribute="trailing" secondItem="kRZ-bC-qQw" secondAttribute="trailing" id="K4G-dL-i5D"/>
+                            <constraint firstItem="kRZ-bC-qQw" firstAttribute="top" secondItem="Wa6-p4-G4G" secondAttribute="bottom" id="w1m-Ih-AYv"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="Wuz-OP-Txz" kind="unwind" identifier="FilterUnwindSegue" unwindAction="prepareForUnwind:" id="lkb-1F-aj0"/>
@@ -92,8 +97,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WrD-dS-VAi">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WrD-dS-VAi">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="Settings" id="W89-Ji-wGi">
                                         <barButtonItem key="leftBarButtonItem" image="BackArrow" id="IRT-6Y-nJj">
@@ -106,6 +111,11 @@
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WrD-dS-VAi" firstAttribute="top" secondItem="Y0S-ns-eNh" secondAttribute="bottom" id="HoE-cf-3jt"/>
+                            <constraint firstAttribute="trailing" secondItem="WrD-dS-VAi" secondAttribute="trailing" id="jWv-lH-VOJ"/>
+                            <constraint firstItem="WrD-dS-VAi" firstAttribute="leading" secondItem="7ro-Ll-3gk" secondAttribute="leading" id="yMs-Ic-qzl"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="5eE-WI-meV" kind="unwind" identifier="SettingsUnwindSegue" unwindAction="prepareForUnwind:" id="HGW-70-9oT"/>

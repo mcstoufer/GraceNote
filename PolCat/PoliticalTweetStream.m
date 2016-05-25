@@ -55,14 +55,14 @@ static NSArray *states;
         
         // Common trending democrat words
         NSMutableArray *predicates = [NSMutableArray new];
-        for (NSString *keyword in @[@"Hillary", @"Clinton", @"Bernie", @"Sanders", @"Barack", @"Obama", @"Democrat"]) {
+        for (NSString *keyword in @[@"Hillary", @"Clinton", @"Bernie", @"Sanders", @"Barack", @"Obama", @"Democrat", @"berniesanders", @"barackobama", @"hillaryclinton"]) {
             [predicates addObject:[NSPredicate predicateWithFormat:@"self contains[cd] %@", keyword]];
         }
         self.democratPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
         
         // Common trending republican words. Rather small!
         [predicates removeAllObjects];
-        for (NSString *keyword in @[@"Donald", @"Trump", @"Republican"]) {
+        for (NSString *keyword in @[@"Donald", @"Trump", @"Republican", @"realdonaldtrump"]) {
             [predicates addObject:[NSPredicate predicateWithFormat:@"self contains[cd] %@", keyword]];
         }
         self.republicanPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
@@ -315,6 +315,10 @@ static NSArray *states;
  */
 -(NSString *)stateAbbv:(NSString *)state
 {
+    if (state.length == 2) {
+        return state;
+    }
+
     if ([states containsObject:state]) {
         return states[[states indexOfObject:state]+1];
     }
@@ -340,17 +344,16 @@ static NSArray *states;
     }
     
     NSArray *arr = @[tweet.text];
-    NSArray *found = [arr filteredArrayUsingPredicate:self.democratPredicate];
-    if (found.count > 0) {
+    NSArray *usr = @[tweet.username];
+    // Scan text of tweet first to see if there is an obvious party affiliation mentioned.
+    if (([arr filteredArrayUsingPredicate:self.democratPredicate].count + [usr filteredArrayUsingPredicate:self.democratPredicate].count) > 0) {
         tweet.party = PartyDemocrat;
         return PartyDemocrat;
-    } else {
-        found = [arr filteredArrayUsingPredicate:self.republicanPredicate];
-        if (found.count > 0) {
-            tweet.party = PartyRepublican;
-            return PartyRepublican;
-        }
+    } else if (([arr filteredArrayUsingPredicate:self.republicanPredicate].count + [usr filteredArrayUsingPredicate:self.republicanPredicate].count) > 0) {
+        tweet.party = PartyRepublican;
+        return PartyRepublican;
     }
+    
     tweet.party = PartyOther;
     return PartyOther;
 }
