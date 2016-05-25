@@ -31,7 +31,7 @@ static NSCache *_sharedCache;
     NSString *scheme = [url scheme];
     
     // NOTE: This scheme is defined in the Info.plist and is used by Flickr for OAuth purposes.
-    if([@"gracenotedemo" isEqualToString:scheme]) {
+    if([@"polcat" isEqualToString:scheme]) {
         // I don't recommend doing it like this, it's just a demo... I use an authentication
         // controller singleton object in my projects
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UserAuthCallbackNotification" object:url userInfo:nil];

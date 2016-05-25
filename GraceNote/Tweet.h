@@ -21,12 +21,19 @@
  */
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, assign) NSUInteger likeCount;
+/**
+ *  @brief The number of times this tweet has been retweeted.
+ */
 @property (nonatomic, assign) NSUInteger rtCount;
 /**
  *  @brief The date this tweet was initialy posted.
  */
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSURL *tweetImageURL;
+@property (nonatomic, strong) UIColor *fillColor;
+
+@property (nonatomic, assign) BOOL retweeted;
+@property (nonatomic, assign) BOOL liked;
 
 -(instancetype)initTweetWithDict:(NSDictionary *)dict;
 

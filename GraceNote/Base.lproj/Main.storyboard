@@ -75,7 +75,7 @@
         <scene sceneID="ODF-L2-fCi">
             <objects>
                 <tableViewController id="OZ1-V9-igb" customClass="TweeterTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Chf-IW-xZ1">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Chf-IW-xZ1">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -190,34 +190,8 @@
                                     <constraint firstAttribute="width" constant="165" id="zFn-CX-5wn"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="fr6-rt-xMR" userLabel="Like image">
-                                <rect key="frame" x="184" y="259" width="25" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="URG-vp-qVG"/>
-                                    <constraint firstAttribute="height" constant="25" id="Vu4-Nc-Jo5"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKp-Vv-R2R" userLabel="Like label">
-                                <rect key="frame" x="136" y="263" width="40" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpz-SF-wM3" userLabel="RT label">
-                                <rect key="frame" x="423" y="263" width="40" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RT" translatesAutoresizingMaskIntoConstraints="NO" id="2fe-o2-EOs" userLabel="RT image">
-                                <rect key="frame" x="390" y="259" width="25" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="Zgv-DT-RCN"/>
-                                    <constraint firstAttribute="width" constant="25" id="h9S-ej-MEy"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0wE-cH-YJw" userLabel="Post date Label">
-                                <rect key="frame" x="97.5" y="406" width="405" height="21"/>
+                                <rect key="frame" x="97" y="406" width="405" height="21"/>
                                 <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -233,28 +207,70 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES" address="YES" calendarEvent="YES"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9LM-7c-C7Z" customClass="RoundedCornersButton">
+                                <rect key="frame" x="392" y="266.5" width="105" height="25"/>
+                                <color key="backgroundColor" red="0.96862745289999996" green="0.98431372640000003" blue="0.98823529480000005" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
+                                <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                <state key="normal" title="RT Count" image="RT"/>
+                                <state key="selected">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="handleRetweetButtonAction:" destination="zHT-aF-1mG" eventType="touchUpInside" id="5fE-R2-z8t"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvy-r6-8NT" customClass="RoundedCornersButton">
+                                <rect key="frame" x="91" y="267" width="116" height="24"/>
+                                <color key="backgroundColor" red="0.9686274528503418" green="0.9843137264251709" blue="0.98823529481887817" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
+                                <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                <state key="normal" title="Like Count" image="Like"/>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="handleLikeButtonAction:" destination="zHT-aF-1mG" eventType="touchUpInside" id="jVN-Ul-RUg"/>
+                                </connections>
+                            </button>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="efK-HJ-1OE" firstAttribute="centerY" secondItem="EhA-W7-UaD" secondAttribute="centerY" multiplier="0.6" id="1Et-g0-QZK"/>
                             <constraint firstItem="DGs-JQ-RLu" firstAttribute="centerX" secondItem="EhA-W7-UaD" secondAttribute="centerX" id="3e9-b2-48k"/>
-                            <constraint firstItem="LKp-Vv-R2R" firstAttribute="baseline" secondItem="efK-HJ-1OE" secondAttribute="baseline" constant="-4.5" id="6aA-kt-GOa"/>
-                            <constraint firstItem="fr6-rt-xMR" firstAttribute="leading" secondItem="LKp-Vv-R2R" secondAttribute="trailing" constant="8" id="7ZV-R7-cZO"/>
+                            <constraint firstItem="9LM-7c-C7Z" firstAttribute="leading" secondItem="efK-HJ-1OE" secondAttribute="trailing" constant="10" id="4nR-V0-XmP"/>
                             <constraint firstItem="Dzc-FH-klR" firstAttribute="bottom" secondItem="GUA-25-vhx" secondAttribute="top" id="BRN-u3-9uQ"/>
                             <constraint firstItem="Oze-I2-Ctm" firstAttribute="top" secondItem="Dzc-FH-klR" secondAttribute="bottom" constant="10" id="BYZ-C5-WUL"/>
                             <constraint firstItem="GUA-25-vhx" firstAttribute="height" secondItem="EhA-W7-UaD" secondAttribute="height" id="FvS-7c-bqn"/>
+                            <constraint firstItem="efK-HJ-1OE" firstAttribute="leading" secondItem="kvy-r6-8NT" secondAttribute="trailing" constant="10" id="Im7-Bk-XF7"/>
                             <constraint firstAttribute="bottom" secondItem="DGs-JQ-RLu" secondAttribute="bottom" constant="25" id="JdB-8Y-Apk"/>
-                            <constraint firstItem="Jpz-SF-wM3" firstAttribute="leading" secondItem="2fe-o2-EOs" secondAttribute="trailing" constant="8" id="Lpy-hv-oQd"/>
                             <constraint firstItem="efK-HJ-1OE" firstAttribute="centerX" secondItem="EhA-W7-UaD" secondAttribute="centerX" id="Lre-eW-7bW"/>
-                            <constraint firstItem="Jpz-SF-wM3" firstAttribute="baseline" secondItem="efK-HJ-1OE" secondAttribute="baseline" constant="-4.5" id="SVm-BG-kJa"/>
-                            <constraint firstItem="2fe-o2-EOs" firstAttribute="baseline" secondItem="efK-HJ-1OE" secondAttribute="baseline" id="Shj-fM-6f2"/>
+                            <constraint firstItem="kvy-r6-8NT" firstAttribute="baseline" secondItem="efK-HJ-1OE" secondAttribute="baseline" id="XvT-pP-CLH"/>
                             <constraint firstItem="0wE-cH-YJw" firstAttribute="bottom" secondItem="DGs-JQ-RLu" secondAttribute="top" id="cdp-W2-bp5"/>
                             <constraint firstItem="0wE-cH-YJw" firstAttribute="width" secondItem="DGs-JQ-RLu" secondAttribute="width" multiplier="0.75" id="gN6-Sb-sMB"/>
                             <constraint firstItem="DGs-JQ-RLu" firstAttribute="width" secondItem="EhA-W7-UaD" secondAttribute="width" multiplier="0.9" id="igH-GF-EmB"/>
+                            <constraint firstItem="9LM-7c-C7Z" firstAttribute="baseline" secondItem="efK-HJ-1OE" secondAttribute="baseline" id="ixw-Qf-EIL"/>
                             <constraint firstItem="GUA-25-vhx" firstAttribute="width" secondItem="EhA-W7-UaD" secondAttribute="width" id="po7-Dy-PIp"/>
                             <constraint firstItem="GUA-25-vhx" firstAttribute="leading" secondItem="EhA-W7-UaD" secondAttribute="leading" id="qmJ-CR-Lgl"/>
-                            <constraint firstItem="fr6-rt-xMR" firstAttribute="trailing" secondItem="efK-HJ-1OE" secondAttribute="leading" constant="-8" id="rPN-xa-V89"/>
-                            <constraint firstItem="2fe-o2-EOs" firstAttribute="leading" secondItem="efK-HJ-1OE" secondAttribute="trailing" constant="8" id="tbd-Ro-At2"/>
-                            <constraint firstItem="fr6-rt-xMR" firstAttribute="baseline" secondItem="efK-HJ-1OE" secondAttribute="baseline" id="xFa-HI-wi1"/>
                             <constraint firstItem="Oze-I2-Ctm" firstAttribute="leading" secondItem="EhA-W7-UaD" secondAttribute="leading" constant="10" id="xj5-h9-XFL"/>
                             <constraint firstItem="0wE-cH-YJw" firstAttribute="centerX" secondItem="EhA-W7-UaD" secondAttribute="centerX" id="yUO-lO-Yj1"/>
                         </constraints>
@@ -262,8 +278,8 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="backButton" destination="Oze-I2-Ctm" id="86z-9Q-Y5S"/>
-                        <outlet property="likeLabel" destination="LKp-Vv-R2R" id="qmk-0D-KsS"/>
-                        <outlet property="retweetLabel" destination="Jpz-SF-wM3" id="JEJ-af-b8O"/>
+                        <outlet property="likeButton" destination="kvy-r6-8NT" id="dSQ-a6-ygy"/>
+                        <outlet property="retweetButton" destination="9LM-7c-C7Z" id="jsM-nF-xX8"/>
                         <outlet property="tweetImage" destination="efK-HJ-1OE" id="Ndv-dm-ajd"/>
                         <outlet property="tweetPostDateLabel" destination="0wE-cH-YJw" id="4di-tT-byV"/>
                         <outlet property="tweetText" destination="DGs-JQ-RLu" id="2xw-m2-ktI"/>

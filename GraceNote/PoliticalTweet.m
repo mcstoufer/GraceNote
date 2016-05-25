@@ -13,7 +13,6 @@
 +(instancetype)initTweetWithDict:(NSDictionary *)dict
 {
     PoliticalTweet *tweet = [[super alloc] initTweetWithDict:dict];
-
     return tweet;
 }
 

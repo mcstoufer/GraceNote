@@ -7,6 +7,7 @@
 //
 
 #import "Tweet.h"
+#import "UIColor+Additions.h"
 
 static NSDateFormatter *_tweetDateFormatter;
 
@@ -22,6 +23,8 @@ static NSDateFormatter *_tweetDateFormatter;
         tweet.likeCount = [dict[@"user"][@"favourites_count"] unsignedIntegerValue];
         tweet.rtCount = [dict[@"retweet_count"] unsignedIntegerValue];
         tweet.tid = dict[@"id_str"];
+        tweet.fillColor = [UIColor colorWithHexString:dict[@"user"][@"profile_sidebar_fill_color"]];
+        
         NSString *normalImage = dict[@"user"][@"profile_image_url_https"];
         normalImage = [normalImage stringByReplacingOccurrencesOfString:@"_normal" withString:@"" options:NSBackwardsSearch range:NSMakeRange(0, normalImage.length)];
         

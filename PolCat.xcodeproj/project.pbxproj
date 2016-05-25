@@ -21,6 +21,10 @@
 		C753CA321CEF722C00B0E78E /* TweetDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C753CA311CEF722C00B0E78E /* TweetDetailViewController.m */; };
 		C753CA351CF3D3DB00B0E78E /* UITextView+RoundedCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = C753CA341CF3D3DB00B0E78E /* UITextView+RoundedCorners.m */; };
 		C753CA381CF3D4B500B0E78E /* UIImage+OvalPortrait.m in Sources */ = {isa = PBXBuildFile; fileRef = C753CA371CF3D4B500B0E78E /* UIImage+OvalPortrait.m */; };
+		C77576971CF4FF3E00A26413 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C77576961CF4FF3E00A26413 /* Social.framework */; };
+		C77576991CF4FF7800A26413 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C77576981CF4FF7800A26413 /* Accounts.framework */; };
+		C775769C1CF63E7500A26413 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C775769B1CF63E7500A26413 /* UIColor+Additions.m */; };
+		C775769F1CF63F1E00A26413 /* RoundedCornersButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C775769E1CF63F1E00A26413 /* RoundedCornersButton.m */; };
 		C7B18EDB1CECB52300B002FE /* TweetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDA1CECB52300B002FE /* TweetImageView.m */; };
 		C7B18EDE1CECBE5900B002FE /* TweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDD1CECBE5900B002FE /* TweetStream.m */; };
 		C7B18EE11CECBE6900B002FE /* PoliticalTweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EE01CECBE6900B002FE /* PoliticalTweetStream.m */; };
@@ -77,6 +81,12 @@
 		C753CA341CF3D3DB00B0E78E /* UITextView+RoundedCorners.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+RoundedCorners.m"; sourceTree = "<group>"; };
 		C753CA361CF3D4B500B0E78E /* UIImage+OvalPortrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+OvalPortrait.h"; sourceTree = "<group>"; };
 		C753CA371CF3D4B500B0E78E /* UIImage+OvalPortrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+OvalPortrait.m"; sourceTree = "<group>"; };
+		C77576961CF4FF3E00A26413 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		C77576981CF4FF7800A26413 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		C775769A1CF63E7500A26413 /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Additions.h"; sourceTree = "<group>"; };
+		C775769B1CF63E7500A26413 /* UIColor+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Additions.m"; sourceTree = "<group>"; };
+		C775769D1CF63F1E00A26413 /* RoundedCornersButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedCornersButton.h; sourceTree = "<group>"; };
+		C775769E1CF63F1E00A26413 /* RoundedCornersButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedCornersButton.m; sourceTree = "<group>"; };
 		C7B18ED91CECB52300B002FE /* TweetImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetImageView.h; sourceTree = "<group>"; };
 		C7B18EDA1CECB52300B002FE /* TweetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetImageView.m; sourceTree = "<group>"; };
 		C7B18EDC1CECBE5900B002FE /* TweetStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetStream.h; sourceTree = "<group>"; };
@@ -99,6 +109,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C77576991CF4FF7800A26413 /* Accounts.framework in Frameworks */,
+				C77576971CF4FF3E00A26413 /* Social.framework in Frameworks */,
 				360397F3C68AD13380403107 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +186,10 @@
 		C742F33A1CEC10AA00D0B7E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C775769D1CF63F1E00A26413 /* RoundedCornersButton.h */,
+				C775769E1CF63F1E00A26413 /* RoundedCornersButton.m */,
+				C775769A1CF63E7500A26413 /* UIColor+Additions.h */,
+				C775769B1CF63E7500A26413 /* UIColor+Additions.m */,
 				C7B18EE81CED135F00B002FE /* NSString+Utility.h */,
 				C7B18EE91CED135F00B002FE /* NSString+Utility.m */,
 				C742F33B1CEC10AA00D0B7E2 /* main.m */,
@@ -256,6 +272,8 @@
 		DFD10644CD18D6F977AF8FCA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C77576981CF4FF7800A26413 /* Accounts.framework */,
+				C77576961CF4FF3E00A26413 /* Social.framework */,
 				3CD091B6492B4AB67527525E /* libPods.a */,
 			);
 			name = Frameworks;
@@ -336,7 +354,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -498,8 +516,10 @@
 				C753CA321CEF722C00B0E78E /* TweetDetailViewController.m in Sources */,
 				C7B18EE41CED0FBA00B002FE /* Tweet.m in Sources */,
 				C742F36F1CEC121000D0B7E2 /* TweeterTableViewCell.m in Sources */,
+				C775769F1CF63F1E00A26413 /* RoundedCornersButton.m in Sources */,
 				C753CA381CF3D4B500B0E78E /* UIImage+OvalPortrait.m in Sources */,
 				C742F3421CEC10AA00D0B7E2 /* TweeterTableViewController.m in Sources */,
+				C775769C1CF63E7500A26413 /* UIColor+Additions.m in Sources */,
 				C7B18EEA1CED135F00B002FE /* NSString+Utility.m in Sources */,
 				C7B18EE71CED0FC700B002FE /* PoliticalTweet.m in Sources */,
 				C7B18EDE1CECBE5900B002FE /* TweetStream.m in Sources */,
