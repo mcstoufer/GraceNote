@@ -27,6 +27,12 @@
 		C775769F1CF63F1E00A26413 /* RoundedCornersButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C775769E1CF63F1E00A26413 /* RoundedCornersButton.m */; };
 		C77576A31CF64F9500A26413 /* FeedFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77576A21CF64F9500A26413 /* FeedFilterViewController.m */; };
 		C77576A61CF64F9F00A26413 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77576A51CF64F9F00A26413 /* SettingsViewController.m */; };
+		C78CD4E51CF75F6200523CCE /* PartiesFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD4E41CF75F6200523CCE /* PartiesFilterViewController.m */; };
+		C78CD4E81CF7618500523CCE /* StatesFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD4E71CF7618500523CCE /* StatesFilterViewController.m */; };
+		C78CD4EB1CF7619400523CCE /* KeywordsFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD4EA1CF7619400523CCE /* KeywordsFilterViewController.m */; };
+		C78CD4EE1CF763C500523CCE /* ChildFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD4ED1CF763C500523CCE /* ChildFilterViewController.m */; };
+		C78CD4F41CF79BF300523CCE /* UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD4F31CF79BF300523CCE /* UserDefaults.m */; };
+		C78CD4F91CF79F8600523CCE /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD4F81CF79F8600523CCE /* Utility.m */; };
 		C7B18EDB1CECB52300B002FE /* TweetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDA1CECB52300B002FE /* TweetImageView.m */; };
 		C7B18EDE1CECBE5900B002FE /* TweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDD1CECBE5900B002FE /* TweetStream.m */; };
 		C7B18EE11CECBE6900B002FE /* PoliticalTweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EE01CECBE6900B002FE /* PoliticalTweetStream.m */; };
@@ -93,6 +99,19 @@
 		C77576A21CF64F9500A26413 /* FeedFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedFilterViewController.m; sourceTree = "<group>"; };
 		C77576A41CF64F9F00A26413 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		C77576A51CF64F9F00A26413 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		C78CD4E31CF75F6200523CCE /* PartiesFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartiesFilterViewController.h; sourceTree = "<group>"; };
+		C78CD4E41CF75F6200523CCE /* PartiesFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartiesFilterViewController.m; sourceTree = "<group>"; };
+		C78CD4E61CF7618500523CCE /* StatesFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatesFilterViewController.h; sourceTree = "<group>"; };
+		C78CD4E71CF7618500523CCE /* StatesFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatesFilterViewController.m; sourceTree = "<group>"; };
+		C78CD4E91CF7619400523CCE /* KeywordsFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordsFilterViewController.h; sourceTree = "<group>"; };
+		C78CD4EA1CF7619400523CCE /* KeywordsFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordsFilterViewController.m; sourceTree = "<group>"; };
+		C78CD4EC1CF763C500523CCE /* ChildFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildFilterViewController.h; sourceTree = "<group>"; };
+		C78CD4ED1CF763C500523CCE /* ChildFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildFilterViewController.m; sourceTree = "<group>"; };
+		C78CD4F21CF79BF300523CCE /* UserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaults.h; sourceTree = "<group>"; };
+		C78CD4F31CF79BF300523CCE /* UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaults.m; sourceTree = "<group>"; };
+		C78CD4F51CF79EDD00523CCE /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		C78CD4F81CF79F8600523CCE /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		C78CD4FA1CF79F9700523CCE /* Utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		C7B18ED91CECB52300B002FE /* TweetImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetImageView.h; sourceTree = "<group>"; };
 		C7B18EDA1CECB52300B002FE /* TweetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetImageView.m; sourceTree = "<group>"; };
 		C7B18EDC1CECBE5900B002FE /* TweetStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetStream.h; sourceTree = "<group>"; };
@@ -192,6 +211,8 @@
 		C742F33A1CEC10AA00D0B7E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C78CD4F21CF79BF300523CCE /* UserDefaults.h */,
+				C78CD4F31CF79BF300523CCE /* UserDefaults.m */,
 				C775769D1CF63F1E00A26413 /* RoundedCornersButton.h */,
 				C775769E1CF63F1E00A26413 /* RoundedCornersButton.m */,
 				C775769A1CF63E7500A26413 /* UIColor+Additions.h */,
@@ -203,6 +224,9 @@
 				C753CA341CF3D3DB00B0E78E /* UITextView+RoundedCorners.m */,
 				C753CA361CF3D4B500B0E78E /* UIImage+OvalPortrait.h */,
 				C753CA371CF3D4B500B0E78E /* UIImage+OvalPortrait.m */,
+				C78CD4F51CF79EDD00523CCE /* Constants.h */,
+				C78CD4F81CF79F8600523CCE /* Utility.m */,
+				C78CD4FA1CF79F9700523CCE /* Utility.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -282,6 +306,14 @@
 				C77576A21CF64F9500A26413 /* FeedFilterViewController.m */,
 				C77576A41CF64F9F00A26413 /* SettingsViewController.h */,
 				C77576A51CF64F9F00A26413 /* SettingsViewController.m */,
+				C78CD4E31CF75F6200523CCE /* PartiesFilterViewController.h */,
+				C78CD4E41CF75F6200523CCE /* PartiesFilterViewController.m */,
+				C78CD4E61CF7618500523CCE /* StatesFilterViewController.h */,
+				C78CD4E71CF7618500523CCE /* StatesFilterViewController.m */,
+				C78CD4E91CF7619400523CCE /* KeywordsFilterViewController.h */,
+				C78CD4EA1CF7619400523CCE /* KeywordsFilterViewController.m */,
+				C78CD4EC1CF763C500523CCE /* ChildFilterViewController.h */,
+				C78CD4ED1CF763C500523CCE /* ChildFilterViewController.m */,
 			);
 			name = "Ancillary views";
 			sourceTree = "<group>";
@@ -532,8 +564,10 @@
 			files = (
 				C753CA321CEF722C00B0E78E /* TweetDetailViewController.m in Sources */,
 				C7B18EE41CED0FBA00B002FE /* Tweet.m in Sources */,
+				C78CD4F91CF79F8600523CCE /* Utility.m in Sources */,
 				C77576A31CF64F9500A26413 /* FeedFilterViewController.m in Sources */,
 				C742F36F1CEC121000D0B7E2 /* TweeterTableViewCell.m in Sources */,
+				C78CD4EB1CF7619400523CCE /* KeywordsFilterViewController.m in Sources */,
 				C775769F1CF63F1E00A26413 /* RoundedCornersButton.m in Sources */,
 				C753CA381CF3D4B500B0E78E /* UIImage+OvalPortrait.m in Sources */,
 				C742F3421CEC10AA00D0B7E2 /* TweeterTableViewController.m in Sources */,
@@ -543,12 +577,16 @@
 				C7B18EDE1CECBE5900B002FE /* TweetStream.m in Sources */,
 				C77576A61CF64F9F00A26413 /* SettingsViewController.m in Sources */,
 				C742F33F1CEC10AA00D0B7E2 /* AppDelegate.m in Sources */,
+				C78CD4E51CF75F6200523CCE /* PartiesFilterViewController.m in Sources */,
 				C7B18EDB1CECB52300B002FE /* TweetImageView.m in Sources */,
 				C742F3721CEC187B00D0B7E2 /* TweeterViewController.m in Sources */,
+				C78CD4E81CF7618500523CCE /* StatesFilterViewController.m in Sources */,
 				C753CA351CF3D3DB00B0E78E /* UITextView+RoundedCorners.m in Sources */,
+				C78CD4EE1CF763C500523CCE /* ChildFilterViewController.m in Sources */,
 				C742F33C1CEC10AA00D0B7E2 /* main.m in Sources */,
 				C7B18EE11CECBE6900B002FE /* PoliticalTweetStream.m in Sources */,
 				C7B18EEF1CED283D00B002FE /* FKAuthViewController.m in Sources */,
+				C78CD4F41CF79BF300523CCE /* UserDefaults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,6 @@
 
 #import "Tweet.h"
 #import "PoliticalTweetStream.h"
-
 /**
  *  @brief A Tweet sublclass to capture tweet politic-properties.
  */

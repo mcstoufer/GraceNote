@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FeedFilterViewController : UIViewController
+@interface FeedFilterViewController : UITabBarController
+
+-(void)handleUnwindAction:(id)sender;
 
 @end
