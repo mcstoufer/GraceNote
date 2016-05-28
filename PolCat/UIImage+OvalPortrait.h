@@ -12,4 +12,6 @@
 
 -(UIImage *)ovalImageForRect:(CGRect)rect andStrokeColor:(CGColorRef)color;
 
+-(UIImage *)resizeWithSize:(CGSize)size;
+
 @end

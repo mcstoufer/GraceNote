@@ -81,6 +81,29 @@
     }
 }
 
+-(void)toggleStateFilter:(NSString *)us_state state:(BOOL)state
+{
+    [[NSUserDefaults standardUserDefaults] setBool:state forKey:us_state];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void)toggleStateFilters:(NSDictionary <NSString *, NSNumber *> *)us_states
+{
+    [us_states enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSNumber * _Nonnull obj, BOOL * _Nonnull stop) {
+        [[NSUserDefaults standardUserDefaults] setBool:[obj boolValue] forKey:key];
+    }];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(BOOL)selectedState:(NSString *)us_state
+{
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:us_state]) {
+        [self toggleStateFilter:us_state state:YES];
+        return YES;
+    }
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:us_state] boolValue];
+}
+
 /**
  *  synchronize the environment to a user defined value instead of what is in the environment plist
  *

@@ -33,6 +33,9 @@
 		C78CD4EE1CF763C500523CCE /* ChildFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD4ED1CF763C500523CCE /* ChildFilterViewController.m */; };
 		C78CD4F41CF79BF300523CCE /* UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD4F31CF79BF300523CCE /* UserDefaults.m */; };
 		C78CD4F91CF79F8600523CCE /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD4F81CF79F8600523CCE /* Utility.m */; };
+		C78CD4FC1CF7A7E000523CCE /* fo-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C78CD4FB1CF7A7DA00523CCE /* fo-icons.ttf */; };
+		C78CD4FF1CF7B39000523CCE /* StateFilterTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD4FE1CF7B39000523CCE /* StateFilterTableCell.m */; };
+		C78CD5021CF7C84700523CCE /* SelectionFilterTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD5011CF7C84700523CCE /* SelectionFilterTableCell.m */; };
 		C7B18EDB1CECB52300B002FE /* TweetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDA1CECB52300B002FE /* TweetImageView.m */; };
 		C7B18EDE1CECBE5900B002FE /* TweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDD1CECBE5900B002FE /* TweetStream.m */; };
 		C7B18EE11CECBE6900B002FE /* PoliticalTweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EE01CECBE6900B002FE /* PoliticalTweetStream.m */; };
@@ -112,6 +115,11 @@
 		C78CD4F51CF79EDD00523CCE /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		C78CD4F81CF79F8600523CCE /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		C78CD4FA1CF79F9700523CCE /* Utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		C78CD4FB1CF7A7DA00523CCE /* fo-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fo-icons.ttf"; sourceTree = "<group>"; };
+		C78CD4FD1CF7B39000523CCE /* StateFilterTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateFilterTableCell.h; sourceTree = "<group>"; };
+		C78CD4FE1CF7B39000523CCE /* StateFilterTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateFilterTableCell.m; sourceTree = "<group>"; };
+		C78CD5001CF7C84700523CCE /* SelectionFilterTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionFilterTableCell.h; sourceTree = "<group>"; };
+		C78CD5011CF7C84700523CCE /* SelectionFilterTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionFilterTableCell.m; sourceTree = "<group>"; };
 		C7B18ED91CECB52300B002FE /* TweetImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetImageView.h; sourceTree = "<group>"; };
 		C7B18EDA1CECB52300B002FE /* TweetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetImageView.m; sourceTree = "<group>"; };
 		C7B18EDC1CECBE5900B002FE /* TweetStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetStream.h; sourceTree = "<group>"; };
@@ -192,7 +200,7 @@
 		C742F3391CEC10AA00D0B7E2 /* PolCat */ = {
 			isa = PBXGroup;
 			children = (
-				C77576A01CF64F7900A26413 /* Ancillary views */,
+				C77576A01CF64F7900A26413 /* Filter views */,
 				C742F33D1CEC10AA00D0B7E2 /* AppDelegate.h */,
 				C742F33E1CEC10AA00D0B7E2 /* AppDelegate.m */,
 				C742F3461CEC10AA00D0B7E2 /* Assets.xcassets */,
@@ -211,6 +219,7 @@
 		C742F33A1CEC10AA00D0B7E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C78CD4FB1CF7A7DA00523CCE /* fo-icons.ttf */,
 				C78CD4F21CF79BF300523CCE /* UserDefaults.h */,
 				C78CD4F31CF79BF300523CCE /* UserDefaults.m */,
 				C775769D1CF63F1E00A26413 /* RoundedCornersButton.h */,
@@ -299,7 +308,7 @@
 			name = "Feed List";
 			sourceTree = "<group>";
 		};
-		C77576A01CF64F7900A26413 /* Ancillary views */ = {
+		C77576A01CF64F7900A26413 /* Filter views */ = {
 			isa = PBXGroup;
 			children = (
 				C77576A11CF64F9500A26413 /* FeedFilterViewController.h */,
@@ -314,8 +323,12 @@
 				C78CD4EA1CF7619400523CCE /* KeywordsFilterViewController.m */,
 				C78CD4EC1CF763C500523CCE /* ChildFilterViewController.h */,
 				C78CD4ED1CF763C500523CCE /* ChildFilterViewController.m */,
+				C78CD4FD1CF7B39000523CCE /* StateFilterTableCell.h */,
+				C78CD4FE1CF7B39000523CCE /* StateFilterTableCell.m */,
+				C78CD5001CF7C84700523CCE /* SelectionFilterTableCell.h */,
+				C78CD5011CF7C84700523CCE /* SelectionFilterTableCell.m */,
 			);
-			name = "Ancillary views";
+			name = "Filter views";
 			sourceTree = "<group>";
 		};
 		DFD10644CD18D6F977AF8FCA /* Frameworks */ = {
@@ -442,6 +455,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C78CD4FC1CF7A7E000523CCE /* fo-icons.ttf in Resources */,
 				C742F34A1CEC10AA00D0B7E2 /* LaunchScreen.storyboard in Resources */,
 				C742F3471CEC10AA00D0B7E2 /* Assets.xcassets in Resources */,
 				C742F3451CEC10AA00D0B7E2 /* Main.storyboard in Resources */,
@@ -566,6 +580,7 @@
 				C7B18EE41CED0FBA00B002FE /* Tweet.m in Sources */,
 				C78CD4F91CF79F8600523CCE /* Utility.m in Sources */,
 				C77576A31CF64F9500A26413 /* FeedFilterViewController.m in Sources */,
+				C78CD5021CF7C84700523CCE /* SelectionFilterTableCell.m in Sources */,
 				C742F36F1CEC121000D0B7E2 /* TweeterTableViewCell.m in Sources */,
 				C78CD4EB1CF7619400523CCE /* KeywordsFilterViewController.m in Sources */,
 				C775769F1CF63F1E00A26413 /* RoundedCornersButton.m in Sources */,
@@ -586,6 +601,7 @@
 				C742F33C1CEC10AA00D0B7E2 /* main.m in Sources */,
 				C7B18EE11CECBE6900B002FE /* PoliticalTweetStream.m in Sources */,
 				C7B18EEF1CED283D00B002FE /* FKAuthViewController.m in Sources */,
+				C78CD4FF1CF7B39000523CCE /* StateFilterTableCell.m in Sources */,
 				C78CD4F41CF79BF300523CCE /* UserDefaults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

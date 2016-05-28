@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ChildFilterViewController.h"
 
-@interface StatesFilterViewController : ChildFilterViewController
+@interface StatesFilterViewController : ChildFilterViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

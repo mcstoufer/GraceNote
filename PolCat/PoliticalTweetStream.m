@@ -12,6 +12,7 @@
 #import "FlickrKit.h"
 #import "AppDelegate.h"
 #import "Constants.h"
+#import "Utility.h"
 
 @interface PoliticalTweetStream ()
 
@@ -31,10 +32,7 @@
 @property (nonatomic, strong) NSMutableDictionary *lastTweetIDs;
 
 @end
-/**
- *  @brief A helper list of states/abbreviations.
- */
-static NSArray *states;
+
 
 @implementation PoliticalTweetStream
 
@@ -69,58 +67,6 @@ static NSArray *states;
         self.republicanPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
     }
     
-    if (!states) {
-        states = @[@"Alabama", @"AL",
-                   @"Alaska", @"AK",
-                   @"Arizona", @"AZ",
-                   @"Arkansas", @"AR",
-                   @"California", @"CA",
-                   @"Colorado", @"CO",
-                   @"Connecticut", @"CT",
-                   @"Delaware", @"DE",
-                   @"Florida", @"FL",
-                   @"Georgia", @"GA",
-                   @"Hawaii", @"HI",
-                   @"Idaho", @"ID",
-                   @"Illinois", @"IL",
-                   @"Indiana", @"IN",
-                   @"Iowa", @"IA",
-                   @"Kansas", @"KS",
-                   @"Kentucky", @"KY",
-                   @"Louisiana", @"LA",
-                   @"Maine", @"ME",
-                   @"Maryland", @"MD",
-                   @"Massachusetts", @"MA",
-                   @"Michigan", @"MI",
-                   @"Minnesota", @"MN",
-                   @"Mississippi", @"MS",
-                   @"Missouri", @"MO",
-                   @"Montana", @"MT",
-                   @"Nebraska", @"NE",
-                   @"Nevada", @"NV",
-                   @"New Hampshire", @"NH",
-                   @"New Jersey", @"NJ",
-                   @"New Mexico", @"NM",
-                   @"New York", @"NY",
-                   @"North Carolina", @"NC",
-                   @"North Dakota", @"ND",
-                   @"Ohio", @"OH",
-                   @"Oklahoma", @"OK",
-                   @"Oregon", @"OR",
-                   @"Pennsylvania", @"PA",
-                   @"Rhode Island", @"RI",
-                   @"South Carolina", @"SC",
-                   @"South Dakota", @"SD",
-                   @"Tennessee", @"TN",
-                   @"Texas", @"TX",
-                   @"Utah", @"UT",
-                   @"Vermont", @"VT",
-                   @"Virginia", @"VA",
-                   @"Washington", @"WA",
-                   @"West Virginia", @"WV",
-                   @"Wisconsin", @"WI",
-                   @"Wyoming", @"WY"];
-    }
     return self;
 }
 
@@ -298,7 +244,7 @@ static NSArray *states;
     
     NSArray *split = [tweet.text splitWords];
     for (NSString *word in split) {
-        if ([states containsObject:word]) {
+        if ([states() containsObject:word]) {
             tweet.state = word;
             return word;
         }
@@ -316,12 +262,13 @@ static NSArray *states;
  */
 -(NSString *)stateAbbv:(NSString *)state
 {
+    NSArray *_states = states();
     if (state.length == 2) {
         return state;
     }
 
-    if ([states containsObject:state]) {
-        return states[[states indexOfObject:state]+1];
+    if ([_states containsObject:state]) {
+        return _states[[_states indexOfObject:state]+1];
     }
     return nil;
 }

@@ -56,7 +56,8 @@
             });
         } else {
             
-            [self.tweetStream.feedHandle profileImageFor:self.tweet.username successBlock:^(id image) {
+            [self.tweetStream.feedHandle profileImageFor:self.tweet.username
+                                            successBlock:^(id image) {
                 if (image) {
                     
                     UIImage *roundedImage = [image ovalImageForRect:self.tweetImage.frame

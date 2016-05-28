@@ -94,5 +94,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>fo-icons.ttf</string>
+	</array>
 </dict>
 </plist>

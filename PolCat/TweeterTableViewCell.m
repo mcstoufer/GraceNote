@@ -8,6 +8,7 @@
 
 #import "TweeterTableViewCell.h"
 #import "Tweet.h"
+#import "UIImage+OvalPortrait.h"
 
 @implementation TweeterTableViewCell
 
@@ -39,6 +40,7 @@
          *  @param image The image that the lookup resolved. May be nil.
          */
         [stream primaryImageForTweet:tweet withCompletion:^(UIImage *image) {
+            image = [image resizeWithSize:self.tweetImage.frame.size];
             // Once complete, re-dispatch on main thread so images can be set properly.
             dispatch_async(dispatch_get_main_queue(), ^{
                 

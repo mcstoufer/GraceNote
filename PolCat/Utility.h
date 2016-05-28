@@ -13,5 +13,10 @@
 #import "Constants.h"
 
 NSString* stringForPartyEnum(Party party);
+/**
+ *  @brief A helper list of states/abbreviations.
+ */
+NSArray* states();
+NSString* abvForState(NSString *state);
 
 #endif /* Utility_h */

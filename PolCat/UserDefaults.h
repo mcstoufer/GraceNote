@@ -44,6 +44,10 @@
 - (void)togglePartyFilter:(Party)party state:(BOOL)state;
 - (BOOL)stateForPartyFilter:(Party)party;
 
+- (void)toggleStateFilter:(NSString *)us_state state:(BOOL)state;
+-(void)toggleStateFilters:(NSDictionary <NSString *, NSNumber *> *)us_states;
+- (BOOL)selectedState:(NSString *)us_state;
+
 /**
  *  return the shared instance object for user defaults
  *
