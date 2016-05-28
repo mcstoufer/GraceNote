@@ -9,6 +9,9 @@
 #ifndef Constants_h
 #define Constants_h
 
+#define kUnchecked @"w"
+#define kChecked @"u"
+
 typedef enum : NSUInteger {
     PartyDemocrat = 0,
     PartyRepublican,

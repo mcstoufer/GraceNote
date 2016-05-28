@@ -36,6 +36,8 @@
 		C78CD4FC1CF7A7E000523CCE /* fo-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C78CD4FB1CF7A7DA00523CCE /* fo-icons.ttf */; };
 		C78CD4FF1CF7B39000523CCE /* StateFilterTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD4FE1CF7B39000523CCE /* StateFilterTableCell.m */; };
 		C78CD5021CF7C84700523CCE /* SelectionFilterTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD5011CF7C84700523CCE /* SelectionFilterTableCell.m */; };
+		C78CD5051CFA298000523CCE /* KeywordCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD5041CFA298000523CCE /* KeywordCollectionViewCell.m */; };
+		C78CD5081CFA3A3400523CCE /* KeywordPartyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD5071CFA3A3400523CCE /* KeywordPartyHeaderView.m */; };
 		C7B18EDB1CECB52300B002FE /* TweetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDA1CECB52300B002FE /* TweetImageView.m */; };
 		C7B18EDE1CECBE5900B002FE /* TweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDD1CECBE5900B002FE /* TweetStream.m */; };
 		C7B18EE11CECBE6900B002FE /* PoliticalTweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EE01CECBE6900B002FE /* PoliticalTweetStream.m */; };
@@ -120,6 +122,10 @@
 		C78CD4FE1CF7B39000523CCE /* StateFilterTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateFilterTableCell.m; sourceTree = "<group>"; };
 		C78CD5001CF7C84700523CCE /* SelectionFilterTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionFilterTableCell.h; sourceTree = "<group>"; };
 		C78CD5011CF7C84700523CCE /* SelectionFilterTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionFilterTableCell.m; sourceTree = "<group>"; };
+		C78CD5031CFA298000523CCE /* KeywordCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordCollectionViewCell.h; sourceTree = "<group>"; };
+		C78CD5041CFA298000523CCE /* KeywordCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordCollectionViewCell.m; sourceTree = "<group>"; };
+		C78CD5061CFA3A3400523CCE /* KeywordPartyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordPartyHeaderView.h; sourceTree = "<group>"; };
+		C78CD5071CFA3A3400523CCE /* KeywordPartyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordPartyHeaderView.m; sourceTree = "<group>"; };
 		C7B18ED91CECB52300B002FE /* TweetImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetImageView.h; sourceTree = "<group>"; };
 		C7B18EDA1CECB52300B002FE /* TweetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetImageView.m; sourceTree = "<group>"; };
 		C7B18EDC1CECBE5900B002FE /* TweetStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetStream.h; sourceTree = "<group>"; };
@@ -311,22 +317,26 @@
 		C77576A01CF64F7900A26413 /* Filter views */ = {
 			isa = PBXGroup;
 			children = (
-				C77576A11CF64F9500A26413 /* FeedFilterViewController.h */,
-				C77576A21CF64F9500A26413 /* FeedFilterViewController.m */,
-				C77576A41CF64F9F00A26413 /* SettingsViewController.h */,
-				C77576A51CF64F9F00A26413 /* SettingsViewController.m */,
-				C78CD4E31CF75F6200523CCE /* PartiesFilterViewController.h */,
-				C78CD4E41CF75F6200523CCE /* PartiesFilterViewController.m */,
-				C78CD4E61CF7618500523CCE /* StatesFilterViewController.h */,
-				C78CD4E71CF7618500523CCE /* StatesFilterViewController.m */,
-				C78CD4E91CF7619400523CCE /* KeywordsFilterViewController.h */,
-				C78CD4EA1CF7619400523CCE /* KeywordsFilterViewController.m */,
 				C78CD4EC1CF763C500523CCE /* ChildFilterViewController.h */,
 				C78CD4ED1CF763C500523CCE /* ChildFilterViewController.m */,
-				C78CD4FD1CF7B39000523CCE /* StateFilterTableCell.h */,
-				C78CD4FE1CF7B39000523CCE /* StateFilterTableCell.m */,
+				C77576A11CF64F9500A26413 /* FeedFilterViewController.h */,
+				C77576A21CF64F9500A26413 /* FeedFilterViewController.m */,
+				C78CD5031CFA298000523CCE /* KeywordCollectionViewCell.h */,
+				C78CD5041CFA298000523CCE /* KeywordCollectionViewCell.m */,
+				C78CD5061CFA3A3400523CCE /* KeywordPartyHeaderView.h */,
+				C78CD5071CFA3A3400523CCE /* KeywordPartyHeaderView.m */,
+				C78CD4E91CF7619400523CCE /* KeywordsFilterViewController.h */,
+				C78CD4EA1CF7619400523CCE /* KeywordsFilterViewController.m */,
+				C78CD4E31CF75F6200523CCE /* PartiesFilterViewController.h */,
+				C78CD4E41CF75F6200523CCE /* PartiesFilterViewController.m */,
 				C78CD5001CF7C84700523CCE /* SelectionFilterTableCell.h */,
 				C78CD5011CF7C84700523CCE /* SelectionFilterTableCell.m */,
+				C77576A41CF64F9F00A26413 /* SettingsViewController.h */,
+				C77576A51CF64F9F00A26413 /* SettingsViewController.m */,
+				C78CD4FD1CF7B39000523CCE /* StateFilterTableCell.h */,
+				C78CD4FE1CF7B39000523CCE /* StateFilterTableCell.m */,
+				C78CD4E61CF7618500523CCE /* StatesFilterViewController.h */,
+				C78CD4E71CF7618500523CCE /* StatesFilterViewController.m */,
 			);
 			name = "Filter views";
 			sourceTree = "<group>";
@@ -590,6 +600,8 @@
 				C7B18EEA1CED135F00B002FE /* NSString+Utility.m in Sources */,
 				C7B18EE71CED0FC700B002FE /* PoliticalTweet.m in Sources */,
 				C7B18EDE1CECBE5900B002FE /* TweetStream.m in Sources */,
+				C78CD5051CFA298000523CCE /* KeywordCollectionViewCell.m in Sources */,
+				C78CD5081CFA3A3400523CCE /* KeywordPartyHeaderView.m in Sources */,
 				C77576A61CF64F9F00A26413 /* SettingsViewController.m in Sources */,
 				C742F33F1CEC10AA00D0B7E2 /* AppDelegate.m in Sources */,
 				C78CD4E51CF75F6200523CCE /* PartiesFilterViewController.m in Sources */,

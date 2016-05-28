@@ -7,16 +7,13 @@
 //
 
 #import "StateFilterTableCell.h"
+#import "Constants.h"
 
 @implementation StateFilterTableCell
 
 -(void)toggleCheckState
 {
-    if (!self.checked) {
-        [self checkState];
-    } else {
-        [self uncheckState];
-    }
+    (self.checked ? [self uncheckState] : [self checkState]);
 }
 
 -(void)checkState

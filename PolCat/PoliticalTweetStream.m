@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "Utility.h"
+#import "UserDefaults.h"
 
 @interface PoliticalTweetStream ()
 
@@ -54,14 +55,14 @@
         
         // Common trending democrat words
         NSMutableArray *predicates = [NSMutableArray new];
-        for (NSString *keyword in @[@"Hillary", @"Clinton", @"Bernie", @"Sanders", @"Barack", @"Obama", @"Democrat", @"berniesanders", @"barackobama", @"hillaryclinton"]) {
+        for (NSString *keyword in [[UserDefaults standardUserDefaults] keywordsForParty:PartyDemocrat]) {
             [predicates addObject:[NSPredicate predicateWithFormat:@"self contains[cd] %@", keyword]];
         }
         self.democratPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
         
         // Common trending republican words. Rather small!
         [predicates removeAllObjects];
-        for (NSString *keyword in @[@"Donald", @"Trump", @"Republican", @"realdonaldtrump"]) {
+        for (NSString *keyword in [[UserDefaults standardUserDefaults] keywordsForParty:PartyRepublican]) {
             [predicates addObject:[NSPredicate predicateWithFormat:@"self contains[cd] %@", keyword]];
         }
         self.republicanPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];

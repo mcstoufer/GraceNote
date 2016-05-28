@@ -48,6 +48,9 @@
 -(void)toggleStateFilters:(NSDictionary <NSString *, NSNumber *> *)us_states;
 - (BOOL)selectedState:(NSString *)us_state;
 
+-(void)setKeywords:(NSArray <NSString *> *)keywords forParty:(Party)party;
+-(NSArray <NSString *> *)keywordsForParty:(Party)party;
+
 /**
  *  return the shared instance object for user defaults
  *

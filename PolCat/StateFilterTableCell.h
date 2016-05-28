@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UIColor+Additions.h"
 
-#define kUnchecked @"w"
-#define kChecked @"u"
-
 @interface StateFilterTableCell : UITableViewCell
 
 @property (nonatomic, assign) BOOL checked;

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ChildFilterViewController.h"
 
-@interface KeywordsFilterViewController : ChildFilterViewController
+@interface KeywordsFilterViewController : ChildFilterViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end

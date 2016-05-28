@@ -7,6 +7,7 @@
 //
 
 #import "SelectionFilterTableCell.h"
+#import "Constants.h"
 
 @implementation SelectionFilterTableCell
 
@@ -29,12 +30,11 @@
 }
 -(void)configureWithSelectionState
 {
+    self.checkboxLabel.text = (self.checked ? kChecked : kUnchecked);
     if (self.checked) {
-        self.checkboxLabel.text = kChecked;
         self.checkboxLabel.backgroundColor = [UIColor colorWithHexString:@"#48B093"];
         self.stateLabel.text = @"Deselect all";
     } else {
-        self.checkboxLabel.text = kUnchecked;
         self.checkboxLabel.backgroundColor = [UIColor clearColor];
         self.stateLabel.text = @"Select all";
         

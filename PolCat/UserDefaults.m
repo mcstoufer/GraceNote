@@ -104,6 +104,19 @@
     return [[[NSUserDefaults standardUserDefaults] objectForKey:us_state] boolValue];
 }
 
+-(void)setKeywords:(NSArray<NSString *> *)keywords forParty:(Party)party
+{
+    NSString *key = [NSString stringWithFormat:@"%@_keywords", stringForPartyEnum(party)];
+    [[NSUserDefaults standardUserDefaults] setObject:keywords forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(NSArray<NSString *> *)keywordsForParty:(Party)party
+{
+    NSString *key = [NSString stringWithFormat:@"%@_keywords", stringForPartyEnum(party)];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+}
+
 /**
  *  synchronize the environment to a user defined value instead of what is in the environment plist
  *
