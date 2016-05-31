@@ -3,6 +3,10 @@
 @import Foundation;
 @import UIKit;
 
+#define kFilterStates @"States"
+#define kFilterParties @"Parties"
+#define kFilterKeywords @"Keywords"
+
 #import "Constants.h"
 
 /**
@@ -41,16 +45,7 @@
  */
 @property (nonatomic, assign) CGFloat expectedKeyboardHeight;
 
-- (void)togglePartyFilter:(Party)party state:(BOOL)state;
-- (BOOL)stateForPartyFilter:(Party)party;
-
-- (void)toggleStateFilter:(NSString *)us_state state:(BOOL)state;
--(void)toggleStateFilters:(NSDictionary <NSString *, NSNumber *> *)us_states;
-- (BOOL)selectedState:(NSString *)us_state;
-
--(void)setKeywords:(NSArray <NSString *> *)keywords forParty:(Party)party;
--(NSArray <NSString *> *)keywordsForParty:(Party)party;
-
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableDictionary *> *filterSettings;
 /**
  *  return the shared instance object for user defaults
  *

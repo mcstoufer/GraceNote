@@ -11,6 +11,7 @@
 
 @interface ChildFilterViewController : UIViewController
 
+@property (nonatomic, assign) BOOL touched;
 @property (nonatomic, weak) FeedFilterViewController *parent;
 
 @end

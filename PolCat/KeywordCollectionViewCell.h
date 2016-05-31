@@ -11,6 +11,7 @@
 @interface KeywordCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, assign) BOOL checked;
+@property (nonatomic, weak) IBOutlet UILabel *keyword;
 
 -(void)configureCellWithKeyword:(NSString *)keyword andSelection:(BOOL)selected;
 -(void)toggleCheckState;

@@ -64,57 +64,22 @@
     return !loggedIn;
 }
 
--(void)togglePartyFilter:(Party)party state:(BOOL)state
+-(void)setFilterSettings:(NSMutableDictionary<NSString *,NSMutableDictionary *> *)filterSettings
 {
-    [[NSUserDefaults standardUserDefaults] setBool:state forKey:stringForPartyEnum(party)];
+    [[NSUserDefaults standardUserDefaults] setObject:filterSettings forKey:@"kFilterSettings"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(BOOL)stateForPartyFilter:(Party)party
+-(NSMutableDictionary<NSString *,NSMutableDictionary *> *)filterSettings
 {
-    NSString *key = stringForPartyEnum(party);
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:key]) {
-        return [[NSUserDefaults standardUserDefaults] boolForKey:key];
-    } else {
-        [self togglePartyFilter:party state:YES];
-        return YES;
+    NSMutableDictionary *filterSettings = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"kFilterSettings"]];
+    if (!filterSettings || filterSettings.count == 0) {
+        filterSettings = [NSMutableDictionary dictionaryWithDictionary:@{kFilterStates : [NSMutableDictionary dictionary],
+                           kFilterParties : [NSMutableDictionary dictionary],
+                           kFilterKeywords : [NSMutableDictionary dictionary]}];
+        [self setFilterSettings:filterSettings];
     }
-}
-
--(void)toggleStateFilter:(NSString *)us_state state:(BOOL)state
-{
-    [[NSUserDefaults standardUserDefaults] setBool:state forKey:us_state];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
--(void)toggleStateFilters:(NSDictionary <NSString *, NSNumber *> *)us_states
-{
-    [us_states enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSNumber * _Nonnull obj, BOOL * _Nonnull stop) {
-        [[NSUserDefaults standardUserDefaults] setBool:[obj boolValue] forKey:key];
-    }];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
--(BOOL)selectedState:(NSString *)us_state
-{
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:us_state]) {
-        [self toggleStateFilter:us_state state:YES];
-        return YES;
-    }
-    return [[[NSUserDefaults standardUserDefaults] objectForKey:us_state] boolValue];
-}
-
--(void)setKeywords:(NSArray<NSString *> *)keywords forParty:(Party)party
-{
-    NSString *key = [NSString stringWithFormat:@"%@_keywords", stringForPartyEnum(party)];
-    [[NSUserDefaults standardUserDefaults] setObject:keywords forKey:key];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
--(NSArray<NSString *> *)keywordsForParty:(Party)party
-{
-    NSString *key = [NSString stringWithFormat:@"%@_keywords", stringForPartyEnum(party)];
-    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    return filterSettings;
 }
 
 /**

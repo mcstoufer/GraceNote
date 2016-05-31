@@ -17,6 +17,8 @@ NSString* stringForPartyEnum(Party party);
  *  @brief A helper list of states/abbreviations.
  */
 NSArray* states();
+NSArray* statesOnly();
+
 NSString* abvForState(NSString *state);
 
 #endif /* Utility_h */

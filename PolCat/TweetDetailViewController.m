@@ -31,13 +31,13 @@
 -(void)viewDidLoad
 {
     self.likeButton.borderColor = self.tweet.fillColor;
-    [self.likeButton setTitle:[NSString stringWithFormat:@"%lu", self.tweet.likeCount] forState:UIControlStateNormal];
+    [self.likeButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.tweet.likeCount] forState:UIControlStateNormal];
     self.likeButton.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     self.likeButton.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     self.likeButton.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     
     self.retweetButton.borderColor = self.tweet.fillColor;
-    [self.retweetButton setTitle:[NSString stringWithFormat:@"%lu", self.tweet.rtCount] forState:UIControlStateNormal];
+    [self.retweetButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.tweet.rtCount] forState:UIControlStateNormal];
     
     self.tweetImage.image = [self.tweet defaultTweetImage];
     self.tweetText.text = self.tweet.text;
@@ -109,7 +109,7 @@
                             self.tweet.rtCount = [result[@"retweet_count"] integerValue];
                             self.tweet.retweeted = YES;
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                [self.retweetButton setTitle:[NSString stringWithFormat:@"%lu", self.tweet.rtCount] forState:UIControlStateNormal];
+                                [self.retweetButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.tweet.rtCount] forState:UIControlStateNormal];
                             });
                         } else {
                             NSLog(@"Failed to retweet %@: %@", self.tweet.tid, error.localizedDescription);
@@ -158,7 +158,7 @@
                             self.tweet.likeCount++;
                             self.tweet.liked = YES;
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                [self.likeButton setTitle:[NSString stringWithFormat:@"%lu", self.tweet.likeCount] forState:UIControlStateNormal];
+                                [self.likeButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.tweet.likeCount] forState:UIControlStateNormal];
                             });
                         } else {
                             NSLog(@"Failed to like %@: %@", self.tweet.tid, error.localizedDescription);

@@ -38,6 +38,7 @@
 		C78CD5021CF7C84700523CCE /* SelectionFilterTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD5011CF7C84700523CCE /* SelectionFilterTableCell.m */; };
 		C78CD5051CFA298000523CCE /* KeywordCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD5041CFA298000523CCE /* KeywordCollectionViewCell.m */; };
 		C78CD5081CFA3A3400523CCE /* KeywordPartyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD5071CFA3A3400523CCE /* KeywordPartyHeaderView.m */; };
+		C78CD50B1CFCA22000523CCE /* Filters.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD50A1CFCA22000523CCE /* Filters.m */; };
 		C7B18EDB1CECB52300B002FE /* TweetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDA1CECB52300B002FE /* TweetImageView.m */; };
 		C7B18EDE1CECBE5900B002FE /* TweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDD1CECBE5900B002FE /* TweetStream.m */; };
 		C7B18EE11CECBE6900B002FE /* PoliticalTweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EE01CECBE6900B002FE /* PoliticalTweetStream.m */; };
@@ -126,6 +127,8 @@
 		C78CD5041CFA298000523CCE /* KeywordCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordCollectionViewCell.m; sourceTree = "<group>"; };
 		C78CD5061CFA3A3400523CCE /* KeywordPartyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordPartyHeaderView.h; sourceTree = "<group>"; };
 		C78CD5071CFA3A3400523CCE /* KeywordPartyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordPartyHeaderView.m; sourceTree = "<group>"; };
+		C78CD5091CFCA22000523CCE /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
+		C78CD50A1CFCA22000523CCE /* Filters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filters.m; sourceTree = "<group>"; };
 		C7B18ED91CECB52300B002FE /* TweetImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetImageView.h; sourceTree = "<group>"; };
 		C7B18EDA1CECB52300B002FE /* TweetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetImageView.m; sourceTree = "<group>"; };
 		C7B18EDC1CECBE5900B002FE /* TweetStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetStream.h; sourceTree = "<group>"; };
@@ -337,6 +340,8 @@
 				C78CD4FE1CF7B39000523CCE /* StateFilterTableCell.m */,
 				C78CD4E61CF7618500523CCE /* StatesFilterViewController.h */,
 				C78CD4E71CF7618500523CCE /* StatesFilterViewController.m */,
+				C78CD5091CFCA22000523CCE /* Filters.h */,
+				C78CD50A1CFCA22000523CCE /* Filters.m */,
 			);
 			name = "Filter views";
 			sourceTree = "<group>";
@@ -599,6 +604,7 @@
 				C775769C1CF63E7500A26413 /* UIColor+Additions.m in Sources */,
 				C7B18EEA1CED135F00B002FE /* NSString+Utility.m in Sources */,
 				C7B18EE71CED0FC700B002FE /* PoliticalTweet.m in Sources */,
+				C78CD50B1CFCA22000523CCE /* Filters.m in Sources */,
 				C7B18EDE1CECBE5900B002FE /* TweetStream.m in Sources */,
 				C78CD5051CFA298000523CCE /* KeywordCollectionViewCell.m in Sources */,
 				C78CD5081CFA3A3400523CCE /* KeywordPartyHeaderView.m in Sources */,

@@ -13,7 +13,6 @@
 @interface KeywordCollectionViewCell ()
 
 @property (nonatomic, weak) IBOutlet UILabel *checkbox;
-@property (nonatomic, weak) IBOutlet UILabel *keyword;
 
 @end
 

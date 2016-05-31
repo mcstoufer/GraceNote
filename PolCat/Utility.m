@@ -95,3 +95,19 @@ NSArray *states()
     });
     return _states;
 }
+
+NSArray *statesOnly()
+{
+    static NSArray *_statesOnly;
+    static dispatch_once_t statesOnlyToken;
+    dispatch_once(&statesOnlyToken, ^{
+        
+        NSMutableArray *mutArr = [NSMutableArray arrayWithCapacity:50];
+        NSArray *__states = states();
+        for (int x=0; x<__states.count; x+=2) {
+            [mutArr addObject:__states[x]];
+        }
+        _statesOnly = [NSArray arrayWithArray:mutArr];
+    });
+    return _statesOnly;
+}

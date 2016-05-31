@@ -8,7 +8,7 @@
 
 #import "PartiesFilterViewController.h"
 #import "Constants.h"
-#import "UserDefaults.h"
+#import "Filters.h"
 
 @interface PartiesFilterViewController ()
 
@@ -29,9 +29,21 @@
 {
     [super viewDidLoad];
     
-    self.dSwitch.on = [[UserDefaults standardUserDefaults] stateForPartyFilter:PartyDemocrat];
-    self.rSwitch.on = [[UserDefaults standardUserDefaults] stateForPartyFilter:PartyRepublican];
-    self.oSwitch.on = [[UserDefaults standardUserDefaults] stateForPartyFilter:PartyOther];
+    self.dSwitch.on = [[Filters sharedFilters] stateForPartyFilter:PartyDemocrat];
+    self.rSwitch.on = [[Filters sharedFilters] stateForPartyFilter:PartyRepublican];
+    self.oSwitch.on = [[Filters sharedFilters] stateForPartyFilter:PartyOther];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    if (self.touched) {
+        [[Filters sharedFilters] updateSelectedParties:@{stringForPartyEnum(PartyDemocrat): @(self.dSwitch.on),
+                                                         stringForPartyEnum(PartyRepublican): @(self.rSwitch.on),
+                                                         stringForPartyEnum(PartyOther): @(self.oSwitch.on)}];
+        self.touched = NO;
+    }
+    
 }
 
 -(IBAction)handleUnwindAction:(id)sender
@@ -41,28 +53,7 @@
 
 -(IBAction)handlePartySwitchAction:(id)sender
 {
-    UISwitch *_switch = (UISwitch *)sender;
-    switch ((Party)_switch.tag) {
-        case PartyDemocrat:
-            [[UserDefaults standardUserDefaults] togglePartyFilter:PartyDemocrat
-                                                             state:_switch.on];
-            break;
-        
-        case PartyRepublican:
-            [[UserDefaults standardUserDefaults] togglePartyFilter:PartyRepublican
-                                                             state:_switch.on];
-            break;
-            
-        case PartyOther:
-            [[UserDefaults standardUserDefaults] togglePartyFilter:PartyOther
-                                                             state:_switch.on];
-            break;
-            
-        default:
-            break;
-    }
-    NSString *state = (_switch.on ? @"on" : @"off");
-    NSLog(@"Sender tag: %ld state:%@", (long)_switch.tag, state);
+    self.touched = YES;
 }
 
 @end

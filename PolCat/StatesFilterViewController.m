@@ -9,13 +9,12 @@
 #import "StatesFilterViewController.h"
 #import "StateFilterTableCell.h"
 #import "SelectionFilterTableCell.h"
-#import "Utility.h"
-#import "UserDefaults.h"
+#import "Filters.h"
 
 @interface StatesFilterViewController ()
 
 @property (nonatomic, strong) NSMutableDictionary *stateDict;
-
+@property (nonatomic, strong) NSArray *statesSort;
 @end
 
 @implementation StatesFilterViewController
@@ -24,16 +23,19 @@
 {
     [super viewDidLoad];
     self.stateDict = [NSMutableDictionary dictionaryWithCapacity:50];
-    for (int x=1; x<=50; x++) {
-        NSString *us_state = [states() objectAtIndex:x*2-2];
-        self.stateDict[us_state] = @([[UserDefaults standardUserDefaults] selectedState:us_state]);
-    }
+    self.stateDict = [[Filters sharedFilters] states];
+    self.statesSort = [[self.stateDict allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString  *_Nonnull obj1, NSString *_Nonnull obj2) {
+        return [obj1 compare:obj2];
+    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[UserDefaults standardUserDefaults] toggleStateFilters:self.stateDict];
+    if (self.touched) {
+        [[Filters sharedFilters] updateStates:self.stateDict];
+        self.touched = NO;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -45,7 +47,7 @@
     } else {
         StateFilterTableCell *cell = (StateFilterTableCell *)[tableView dequeueReusableCellWithIdentifier:@"StateFilterCell"];
         
-        NSString *us_state = [states() objectAtIndex:(indexPath.row)*2-2];
+        NSString *us_state = [self.statesSort objectAtIndex:indexPath.row];
         BOOL selected = [self.stateDict[us_state] boolValue];
         [cell configureWithStateValue:us_state withSelection:selected];
         return cell;
@@ -54,12 +56,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.touched = YES;
     if (indexPath.row == 0) {
         SelectionFilterTableCell *selected_cell = [tableView cellForRowAtIndexPath:indexPath];
         [selected_cell toggleSelectionState];
         
-        for (NSInteger r = 1; r < [tableView numberOfRowsInSection:0]-1; r++) {
-            NSString *us_state = [states() objectAtIndex:(r)*2-2];
+        for (NSInteger r = 0; r < [tableView numberOfRowsInSection:0]; r++) {
+            NSString *us_state = [self.statesSort objectAtIndex:r];
             self.stateDict[us_state] = @(selected_cell.checked);
         }
         [tableView reloadData];
