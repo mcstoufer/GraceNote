@@ -34,6 +34,12 @@ static NSDateFormatter *_tweetDateFormatter;
     return tweet;
 }
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"Username: %@\nText: %@\nDate: %@\nlikes: %lu\nrts: %lu\nTID: %@",
+             self.username, self.text, self.date, self.likeCount, self.rtCount, self.tid];
+}
+
 +(NSDate *)dateForTweetCreated:(NSString *)created_at
 {
     if (!_tweetDateFormatter) {

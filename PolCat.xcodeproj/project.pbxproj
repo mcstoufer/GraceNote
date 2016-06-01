@@ -39,6 +39,10 @@
 		C78CD5051CFA298000523CCE /* KeywordCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD5041CFA298000523CCE /* KeywordCollectionViewCell.m */; };
 		C78CD5081CFA3A3400523CCE /* KeywordPartyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD5071CFA3A3400523CCE /* KeywordPartyHeaderView.m */; };
 		C78CD50B1CFCA22000523CCE /* Filters.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD50A1CFCA22000523CCE /* Filters.m */; };
+		C78CD50E1CFDF6DD00523CCE /* TweetModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C78CD50C1CFDF6DD00523CCE /* TweetModel.xcdatamodeld */; };
+		C78CD5151CFDF9C600523CCE /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD5141CFDF9C600523CCE /* DataStore.m */; };
+		C78CD51A1CFE023000523CCE /* TweetMessage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD5171CFE022F00523CCE /* TweetMessage+CoreDataProperties.m */; };
+		C78CD51B1CFE023000523CCE /* TweetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C78CD5191CFE022F00523CCE /* TweetMessage.m */; };
 		C7B18EDB1CECB52300B002FE /* TweetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDA1CECB52300B002FE /* TweetImageView.m */; };
 		C7B18EDE1CECBE5900B002FE /* TweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EDD1CECBE5900B002FE /* TweetStream.m */; };
 		C7B18EE11CECBE6900B002FE /* PoliticalTweetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B18EE01CECBE6900B002FE /* PoliticalTweetStream.m */; };
@@ -129,6 +133,13 @@
 		C78CD5071CFA3A3400523CCE /* KeywordPartyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordPartyHeaderView.m; sourceTree = "<group>"; };
 		C78CD5091CFCA22000523CCE /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
 		C78CD50A1CFCA22000523CCE /* Filters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filters.m; sourceTree = "<group>"; };
+		C78CD50D1CFDF6DD00523CCE /* TweetModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TweetModel.xcdatamodel; sourceTree = "<group>"; };
+		C78CD5131CFDF9C600523CCE /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
+		C78CD5141CFDF9C600523CCE /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
+		C78CD5161CFE022F00523CCE /* TweetMessage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TweetMessage+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C78CD5171CFE022F00523CCE /* TweetMessage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TweetMessage+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C78CD5181CFE022F00523CCE /* TweetMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetMessage.h; sourceTree = "<group>"; };
+		C78CD5191CFE022F00523CCE /* TweetMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetMessage.m; sourceTree = "<group>"; };
 		C7B18ED91CECB52300B002FE /* TweetImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetImageView.h; sourceTree = "<group>"; };
 		C7B18EDA1CECB52300B002FE /* TweetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetImageView.m; sourceTree = "<group>"; };
 		C7B18EDC1CECBE5900B002FE /* TweetStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetStream.h; sourceTree = "<group>"; };
@@ -209,6 +220,7 @@
 		C742F3391CEC10AA00D0B7E2 /* PolCat */ = {
 			isa = PBXGroup;
 			children = (
+				C78CD50F1CFDF8B900523CCE /* Data Model */,
 				C77576A01CF64F7900A26413 /* Filter views */,
 				C742F33D1CEC10AA00D0B7E2 /* AppDelegate.h */,
 				C742F33E1CEC10AA00D0B7E2 /* AppDelegate.m */,
@@ -344,6 +356,20 @@
 				C78CD50A1CFCA22000523CCE /* Filters.m */,
 			);
 			name = "Filter views";
+			sourceTree = "<group>";
+		};
+		C78CD50F1CFDF8B900523CCE /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				C78CD5131CFDF9C600523CCE /* DataStore.h */,
+				C78CD5141CFDF9C600523CCE /* DataStore.m */,
+				C78CD5181CFE022F00523CCE /* TweetMessage.h */,
+				C78CD5191CFE022F00523CCE /* TweetMessage.m */,
+				C78CD5161CFE022F00523CCE /* TweetMessage+CoreDataProperties.h */,
+				C78CD5171CFE022F00523CCE /* TweetMessage+CoreDataProperties.m */,
+				C78CD50C1CFDF6DD00523CCE /* TweetModel.xcdatamodeld */,
+			);
+			name = "Data Model";
 			sourceTree = "<group>";
 		};
 		DFD10644CD18D6F977AF8FCA /* Frameworks */ = {
@@ -593,7 +619,9 @@
 			files = (
 				C753CA321CEF722C00B0E78E /* TweetDetailViewController.m in Sources */,
 				C7B18EE41CED0FBA00B002FE /* Tweet.m in Sources */,
+				C78CD50E1CFDF6DD00523CCE /* TweetModel.xcdatamodeld in Sources */,
 				C78CD4F91CF79F8600523CCE /* Utility.m in Sources */,
+				C78CD51A1CFE023000523CCE /* TweetMessage+CoreDataProperties.m in Sources */,
 				C77576A31CF64F9500A26413 /* FeedFilterViewController.m in Sources */,
 				C78CD5021CF7C84700523CCE /* SelectionFilterTableCell.m in Sources */,
 				C742F36F1CEC121000D0B7E2 /* TweeterTableViewCell.m in Sources */,
@@ -602,6 +630,7 @@
 				C753CA381CF3D4B500B0E78E /* UIImage+OvalPortrait.m in Sources */,
 				C742F3421CEC10AA00D0B7E2 /* TweeterTableViewController.m in Sources */,
 				C775769C1CF63E7500A26413 /* UIColor+Additions.m in Sources */,
+				C78CD51B1CFE023000523CCE /* TweetMessage.m in Sources */,
 				C7B18EEA1CED135F00B002FE /* NSString+Utility.m in Sources */,
 				C7B18EE71CED0FC700B002FE /* PoliticalTweet.m in Sources */,
 				C78CD50B1CFCA22000523CCE /* Filters.m in Sources */,
@@ -613,6 +642,7 @@
 				C78CD4E51CF75F6200523CCE /* PartiesFilterViewController.m in Sources */,
 				C7B18EDB1CECB52300B002FE /* TweetImageView.m in Sources */,
 				C742F3721CEC187B00D0B7E2 /* TweeterViewController.m in Sources */,
+				C78CD5151CFDF9C600523CCE /* DataStore.m in Sources */,
 				C78CD4E81CF7618500523CCE /* StatesFilterViewController.m in Sources */,
 				C753CA351CF3D3DB00B0E78E /* UITextView+RoundedCorners.m in Sources */,
 				C78CD4EE1CF763C500523CCE /* ChildFilterViewController.m in Sources */,
@@ -877,6 +907,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C78CD50C1CFDF6DD00523CCE /* TweetModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C78CD50D1CFDF6DD00523CCE /* TweetModel.xcdatamodel */,
+			);
+			currentVersion = C78CD50D1CFDF6DD00523CCE /* TweetModel.xcdatamodel */;
+			path = TweetModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C742F32F1CEC10AA00D0B7E2 /* Project object */;
 }

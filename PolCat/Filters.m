@@ -53,7 +53,7 @@
     }
 }
 
--(NSMutableDictionary <NSString *, NSNumber *> *)states
+-(NSMutableDictionary <NSString *, id> *)states
 {
     return self.masterDict[kFilterStates];
 }
@@ -176,6 +176,33 @@
     keywordsFilter[key] = [dict[key] copy];
     filters[kFilterKeywords] = keywordsFilter;
     [[UserDefaults standardUserDefaults] setFilterSettings:filters];
+}
+
+-(NSPredicate *)filteredPredicate
+{
+    NSMutableArray *filterPredicates = [NSMutableArray array];
+    [filterPredicates addObject:[NSPredicate predicateWithFormat:@"NOT (us_state IN %@)", [self excludedStates]]];
+    [filterPredicates addObject:[NSPredicate predicateWithFormat:@"NOT (party in %@)", [self excludedParties]]];
+    [filterPredicates addObject:[NSPredicate predicateWithFormat:@"NOT (keywords in %@)", [self excludedKeywords]]];
+    
+    NSCompoundPredicate *compoundFilterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:filterPredicates];
+    
+    return compoundFilterPredicate;
+}
+
+-(NSArray<NSString *> *)excludedStates
+{
+    return @[];
+}
+
+-(NSArray<NSString *> *)excludedParties
+{
+    return @[];
+}
+
+-(NSArray<NSString *> *)excludedKeywords
+{
+    return @[];
 }
 
 /*

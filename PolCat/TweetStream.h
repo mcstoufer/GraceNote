@@ -11,6 +11,8 @@
 #import "STTwitter.h"
 #import "Tweet.h"
 
+@class TweetMessage;
+
 /**
  *  @brief A block definition to handle code execution for when Twitter feed(s) are completely loaded
  *
@@ -58,10 +60,10 @@ typedef void(^FlickrImageCompletionBlock)(UIImage* image);
  *  @discussion Subclasses will be required to implement this method and decice what/how to
  *               accomplish this.
  *
- *  @param tweet    The tweet used to derive info from and resolve a primary image for.
+ *  @param tweetMessage    The TweetMessage Managed Object subclass used to derive info from and resolve a primary image for.
  *  @param complete The block of code to execute once the image has been resolved.
  */
--(void)primaryImageForTweet:(Tweet *)tweet withCompletion:(FlickrImageCompletionBlock)complete;
++(void)primaryImageForTweet:(TweetMessage *)tweet withCompletion:(FlickrImageCompletionBlock)complete;
 /**
  *  @brief Cause the stream o start the lookup for the auxilary image of the tweet.
  *  @discussion Subclasses will be required to implement this method and decice what/how to
@@ -72,6 +74,6 @@ typedef void(^FlickrImageCompletionBlock)(UIImage* image);
  *
  *  @return The aux image or nil if one could not be resolved given the tweet.
  */
--(UIImage *) auxImageForTweet:(Tweet *)tweet;
++(UIImage *)auxImageForTweet:(TweetMessage *)tweet;
 
 @end

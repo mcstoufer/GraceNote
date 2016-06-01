@@ -16,7 +16,7 @@ NSString* stringForPartyEnum(Party party);
 /**
  *  @brief A helper list of states/abbreviations.
  */
-NSArray* states();
+NSOrderedSet* states();
 NSArray* statesOnly();
 
 NSString* abvForState(NSString *state);

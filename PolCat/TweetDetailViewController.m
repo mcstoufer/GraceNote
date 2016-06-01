@@ -15,6 +15,7 @@
 #import "NSDate+TimeAgo.h"
 #import "AppDelegate.h"
 #import "RoundedCornersButton.h"
+#import "DataStore.h"
 
 @interface TweetDetailViewController ()
 
@@ -30,23 +31,27 @@
 
 -(void)viewDidLoad
 {
-    self.likeButton.borderColor = self.tweet.fillColor;
+    [super viewDidLoad];
+    
+    UIColor *fillColor = [self.tweet fillColorForImages];
+    self.likeButton.borderColor = fillColor;
     [self.likeButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.tweet.likeCount] forState:UIControlStateNormal];
     self.likeButton.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     self.likeButton.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     self.likeButton.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     
-    self.retweetButton.borderColor = self.tweet.fillColor;
+    self.retweetButton.borderColor = fillColor;
     [self.retweetButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.tweet.rtCount] forState:UIControlStateNormal];
     
-    self.tweetImage.image = [self.tweet defaultTweetImage];
+    self.tweetImage.image = [self.tweet placeholderImage];
     self.tweetText.text = self.tweet.text;
-    [self.tweetText rounderCornersWithRadius:5.0 andColor:[self.tweet.fillColor CGColor]];
+    [self.tweetText rounderCornersWithRadius:5.0 andColor:[fillColor CGColor]];
     self.tweetPostDateLabel.text = [NSString stringWithFormat:@"Posted %@", [[self.tweet.date timeAgo] lowercaseString]];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
         UIImage *roundedImage = [[AppDelegate sharedCache] objectForKey:self.tweet.tweetImageURL];
@@ -58,20 +63,20 @@
             
             [self.tweetStream.feedHandle profileImageFor:self.tweet.username
                                             successBlock:^(id image) {
-                if (image) {
-                    
-                    UIImage *roundedImage = [image ovalImageForRect:self.tweetImage.frame
-                                                     andStrokeColor:[self.tweet.fillColor CGColor]];
-                    
-                    [[AppDelegate sharedCache] setObject:roundedImage forKey:self.tweet.tweetImageURL];
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.tweetImage.image = roundedImage;
-                    });
-                }
-            } errorBlock:^(NSError *error) {
-                NSLog(@"Failed to retrieve profile image for %@: %@", self.tweet.username, error.localizedDescription);
-            }];
+                                                if (image) {
+                                                    
+                                                    UIImage *roundedImage = [image ovalImageForRect:self.tweetImage.frame
+                                                                                     andStrokeColor:[[self.tweet fillColorForImages] CGColor]];
+                                                    
+                                                    [[AppDelegate sharedCache] setObject:roundedImage forKey:self.tweet.tweetImageURL];
+                                                    
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        self.tweetImage.image = roundedImage;
+                                                    });
+                                                }
+                                            } errorBlock:^(NSError *error) {
+                                                NSLog(@"Failed to retrieve profile image for %@: %@", self.tweet.username, error.localizedDescription);
+                                            }];
         }
     });
 }
@@ -106,8 +111,9 @@
                                 }
                                 return;
                             }
-                            self.tweet.rtCount = [result[@"retweet_count"] integerValue];
-                            self.tweet.retweeted = YES;
+                            self.tweet.rtCount = @([result[@"retweet_count"] integerValue]);
+                            self.tweet.retweeted = @(YES);
+                            [[DataStore sharedStore] saveContext];
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [self.retweetButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.tweet.rtCount] forState:UIControlStateNormal];
                             });
@@ -155,8 +161,9 @@
                                 }
                                 return;
                             }
-                            self.tweet.likeCount++;
-                            self.tweet.liked = YES;
+                            self.tweet.likeCount = @([self.tweet.likeCount integerValue] + 1);
+                            self.tweet.liked = @(YES);
+                            [[DataStore sharedStore] saveContext];
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [self.likeButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.tweet.likeCount] forState:UIControlStateNormal];
                             });

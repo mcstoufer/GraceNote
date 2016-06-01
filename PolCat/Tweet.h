@@ -15,7 +15,7 @@
 @interface Tweet : NSObject
 
 @property (nonatomic, strong) NSString *username;
-@property (nonatomic, strong) NSThread *tid;
+@property (nonatomic, strong) NSString *tid;
 /**
  *  @brief The text of a given tweet.
  */

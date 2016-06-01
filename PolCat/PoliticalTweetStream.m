@@ -1,4 +1,4 @@
-//
+
 //  PoliticalTweetStream.m
 //  GraceNote
 //
@@ -14,6 +14,8 @@
 #import "Constants.h"
 #import "Utility.h"
 #import "Filters.h"
+#import "DataStore.h"
+#import "TweetMessage.h"
 
 @interface PoliticalTweetStream ()
 
@@ -47,7 +49,7 @@
 {
     self = [super init];
     if (self) {
-        self.tweets = @[];
+//        self.tweets = @[];
         self.feedHandle = [STTwitterAPI twitterAPIAppOnlyWithConsumerKey:kConsumerKey
                                                           consumerSecret:kConsumerSec];
         self.feedGroup = dispatch_group_create();
@@ -101,9 +103,9 @@
             long success = dispatch_group_wait(self.feedGroup, timeout);
             
             // Now with all tweets in the list, we sort on their date.
-            self.tweets = [self.tweets sortedArrayUsingComparator:^NSComparisonResult(Tweet *_Nonnull obj1, Tweet *_Nonnull obj2) {
-                return [obj2.date compare:obj1.date];
-            }];
+//            self.tweets = [self.tweets sortedArrayUsingComparator:^NSComparisonResult(Tweet *_Nonnull obj1, Tweet *_Nonnull obj2) {
+//                return [obj2.date compare:obj1.date];
+//            }];
             
             if (complete) {
                 complete(success == 0);
@@ -115,9 +117,9 @@
     }];
 }
 
--(void)primaryImageForTweet:(PoliticalTweet *)tweet withCompletion:(FlickrImageCompletionBlock)complete
++(void)primaryImageForTweet:(TweetMessage *)tweet withCompletion:(FlickrImageCompletionBlock)complete
 {
-    NSString *state = [self possibleStateFromTweet:tweet];
+    NSString *state = tweet.us_state;
     if (state) {
         /* Check to see if the image for the state has been retrieved before and chached. Speeds up recall greatly.
          * If there is any completion block to execute once we have the image, execute it now.
@@ -182,7 +184,7 @@
     }
 }
 
-- (UIViewController*)topMostController
++ (UIViewController*)topMostController
 {
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
     
@@ -201,14 +203,14 @@
  *
  *  @return An image reflecting the party affiliation if one could be found, or nil if one could not.
  */
--(UIImage *)auxImageForTweet:(PoliticalTweet *)tweet
++(UIImage *)auxImageForTweetMessage:(TweetMessage *)tweet
 {
     if ([[AppDelegate sharedCache] objectForKey:tweet.text]) {
         return [[AppDelegate sharedCache] objectForKey:tweet.text];
     }
     
     UIImage *aux;
-    switch ([self possiblePartyFromTweet:tweet]) {
+    switch ((Party)[tweet.party integerValue]) {
         case PartyDemocrat:
             aux= [UIImage imageNamed:@"Democrat"];
             break;
@@ -261,9 +263,9 @@
  *
  *  @return The state abbreviation. or nil if one could not be found. I.e., the state was invalid to begin with.
  */
--(NSString *)stateAbbv:(NSString *)state
++(NSString *)stateAbbv:(NSString *)state
 {
-    NSArray *_states = states();
+    NSOrderedSet *_states = states();
     if (state.length == 2) {
         return state;
     }
@@ -342,8 +344,9 @@
         tweet.party = [self possiblePartyFromTweet:tweet];
         [mut_arr addObject:tweet];
     }
-
-    self.tweets = [self.tweets arrayByAddingObjectsFromArray:mut_arr];
+    [[DataStore sharedStore] batchSaveTweetMessages:mut_arr];
+    
+//    self.tweets = [self.tweets arrayByAddingObjectsFromArray:mut_arr];
     self.lastTweetIDs[username] = [mut_arr firstObject].tid;
     
     dispatch_group_leave(self.feedGroup);

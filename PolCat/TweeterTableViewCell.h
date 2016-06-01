@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TweetStream.h"
 #import "TweetImageView.h"
+#import "TweetMessage.h"
 
 @interface TweeterTableViewCell : UITableViewCell
 
@@ -29,6 +29,5 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
 
--(void)configureCellWithTweetStream:(TweetStream *)stream
-                           forIndex:(NSIndexPath *)path;
+-(void)configureCellWithTweetMessage:(TweetMessage *)tweetMessage;
 @end

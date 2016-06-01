@@ -103,8 +103,7 @@
         TweeterTableViewController *destination = (TweeterTableViewController *)segue.destinationViewController;
         self.tableViewCtlr = destination;
         
-        // Set the stream on thie view controller and let it fire off its config and fetching of data.
-        [destination setTweetStream:[PoliticalTweetStream new] withCompletion:^(BOOL complete) {
+        TweetStreamCompletionBlock streamCompletionBlock = ^(BOOL complete) {
             // TODO: How to handle when the timeout to fetch all the tweets fires and return NO here?
             // Refire off loading, display alert message?
             if (complete)
@@ -116,8 +115,10 @@
                     self.loadingView.hidden = YES;
                 }];
             }
-        }];
+        };
         
+        destination.streamCompletionBlock = streamCompletionBlock;
+        destination.tweetStream = [PoliticalTweetStream new];
         [[Filters sharedFilters] setStates:statesOnly()];
         
         [[Filters sharedFilters] setParties:@[stringForPartyEnum(PartyDemocrat),

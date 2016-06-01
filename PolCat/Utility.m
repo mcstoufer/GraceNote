@@ -37,12 +37,12 @@ NSString* abvForState(NSString *state)
     return nil;
 }
 
-NSArray *states()
+NSOrderedSet *states()
 {
-    static NSArray *_states;
+    static NSOrderedSet *_states;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _states =@[@"Alabama", @"AL",
+        _states = [[NSOrderedSet alloc] initWithArray:@[@"Alabama", @"AL",
                    @"Alaska", @"AK",
                    @"Arizona", @"AZ",
                    @"Arkansas", @"AR",
@@ -91,7 +91,7 @@ NSArray *states()
                    @"Washington", @"WA",
                    @"West Virginia", @"WV",
                    @"Wisconsin", @"WI",
-                   @"Wyoming", @"WY"];
+                   @"Wyoming", @"WY"]];
     });
     return _states;
 }
@@ -103,7 +103,7 @@ NSArray *statesOnly()
     dispatch_once(&statesOnlyToken, ^{
         
         NSMutableArray *mutArr = [NSMutableArray arrayWithCapacity:50];
-        NSArray *__states = states();
+        NSOrderedSet *__states = states();
         for (int x=0; x<__states.count; x+=2) {
             [mutArr addObject:__states[x]];
         }

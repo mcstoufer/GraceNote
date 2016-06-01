@@ -33,12 +33,12 @@
     return nil;
 }
 
--(void)primaryImageForTweet:(Tweet *)tweet withCompletion:(FlickrImageCompletionBlock)complete
++(void)primaryImageForTweet:(TweetMessage *)tweet withCompletion:(FlickrImageCompletionBlock)complete
 {
     return;
 }
 
--(UIImage *)auxImageForTweet:(Tweet *)tweet
++(UIImage *)auxImageForTweet:(TweetMessage *)tweet
 {
     return nil;
 }

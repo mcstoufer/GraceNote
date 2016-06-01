@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Tweet.h"
+#import "TweetMessage.h"
 #import "TweetStream.h"
 
 @interface TweetDetailViewController : UIViewController
 
 @property (nonatomic, strong) TweetStream *tweetStream;
 
-@property (nonatomic, strong) Tweet* tweet;
+@property (nonatomic, strong) TweetMessage* tweet;
 
 @end

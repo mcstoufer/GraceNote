@@ -71,7 +71,7 @@
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionReusableView *reusableview = nil;
+    UICollectionReusableView *reusableview = [UICollectionReusableView new];
     
     if (kind == UICollectionElementKindSectionHeader) {
         KeywordPartyHeaderView *headerView = (KeywordPartyHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"KeywordHeaderView" forIndexPath:indexPath];

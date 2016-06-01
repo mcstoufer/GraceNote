@@ -5,17 +5,20 @@
 //  Created by Martin Stoufer on 5/17/16.
 //  Copyright © 2016 Martin Stoufer. All rights reserved.
 //
-
+#import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
+
 #import "TweetStream.h"
 
 typedef void(^TweetStreamCompletionBlock)(BOOL complete);
 
-@interface TweeterTableViewController <UITableViewDelegate, UITableViewDataSource> : UITableViewController
+@interface TweeterTableViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate> : UITableViewController
 
+@property (nonatomic, strong) TweetStream* tweetStream;
+@property (nonatomic, strong) TweetStreamCompletionBlock streamCompletionBlock;
 
--(void)setTweetStream:(TweetStream *) tweetStream
-       withCompletion:(TweetStreamCompletionBlock)complete;
+//-(void)setTweetStream:(TweetStream *) tweetStream
+//       withCompletion:(TweetStreamCompletionBlock)complete;
 
 @end
 
