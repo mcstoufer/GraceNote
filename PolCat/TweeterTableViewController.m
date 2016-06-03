@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) UIRefreshControl *refresh;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSTimer *fetchTimer;
+
 @end
 
 @implementation TweeterTableViewController
@@ -30,40 +32,43 @@
     [self.tableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     [NSFetchedResultsController deleteCacheWithName:@"TweetMessages"];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleBackgroundNotification:)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
     [self dispatchTableViewLoad];
 }
 
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//}
-//
-//-(void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    NSError *error;
-//    if (![self.fetchedResultsController performFetch:&error]) {
-//        NSLog(@"FRC Error fetching tweets:%@", error.localizedDescription);
-//    }
-//}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.fetchTimer = [NSTimer scheduledTimerWithTimeInterval:15*60
+                                                       target:self
+                                                     selector:@selector(dispatchTableViewLoad)
+                                                     userInfo:nil
+                                                      repeats:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 -(void)refreshTable
 {
     [self dispatchTableViewLoad];
 }
 
-/**
- *  @brief Set the Tweet stream object that will supply the table with data to populate the cells with.
- *
- *  @param tweetStream         The new stream object. It is best to assume that there is nothing useful in the
- *                               stream at this point.
- *  @param streamCompleteBlock The block to execute once the stream has loaded its tweets from Twitter.
- */
-//-(void)setTweetStream:(TweetStream *)tweetStream withCompletion:(TweetStreamCompletionBlock)streamCompleteBlock
-//{
-//    _tweetStream = tweetStream;
-//    [self dispatchTableViewLoadWithCompletion:streamCompleteBlock];
-//}
+-(void)handleBackgroundNotification:(NSNotification *)notify
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 -(void)dispatchTableViewLoad
 {
@@ -74,18 +79,12 @@
             // Refire off loading, display alert message?
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-//                if (!self.tableView.delegate) {
-//                    self.tableView.delegate = self;
-//                    self.tableView.dataSource = self;
-//                }
-                
                 if (self.streamCompletionBlock) {
                     self.streamCompletionBlock(complete);
                     self.streamCompletionBlock = nil;
                 }
                 
                 [self.refreshControl endRefreshing];
-//                [self.tableView reloadData];
             });
         }];
     });
@@ -147,10 +146,7 @@
         return _fetchedResultsController;
     }
     
-    DataStore *dataStore = [DataStore sharedStore];
-//    self.objectChanges = [NSMutableSet set];
-//    self.sectionChanges = [NSMutableArray array];
-    
+    DataStore *dataStore = [DataStore sharedStore];    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"TweetMessage"

@@ -39,6 +39,17 @@
 
 @implementation PoliticalTweetStream
 
+static PoliticalTweetStream *_stream;
+
++(instancetype)sharedStream
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _stream = [PoliticalTweetStream new];
+    });
+    return _stream;
+}
+
 /**
  *  @brief Initialize a Stream
  *
@@ -49,7 +60,6 @@
 {
     self = [super init];
     if (self) {
-//        self.tweets = @[];
         self.feedHandle = [STTwitterAPI twitterAPIAppOnlyWithConsumerKey:kConsumerKey
                                                           consumerSecret:kConsumerSec];
         self.feedGroup = dispatch_group_create();
@@ -102,11 +112,6 @@
             dispatch_time_t timeout = dispatch_time(DISPATCH_TIME_NOW, 60 * 1e9);
             long success = dispatch_group_wait(self.feedGroup, timeout);
             
-            // Now with all tweets in the list, we sort on their date.
-//            self.tweets = [self.tweets sortedArrayUsingComparator:^NSComparisonResult(Tweet *_Nonnull obj1, Tweet *_Nonnull obj2) {
-//                return [obj2.date compare:obj1.date];
-//            }];
-            
             if (complete) {
                 complete(success == 0);
             }
@@ -114,6 +119,7 @@
         
     } errorBlock:^(NSError *error) {
         NSLog(@"Failed to verify credentials: %@", error.localizedDescription);
+        complete(NO);
     }];
 }
 
@@ -346,7 +352,6 @@
     }
     [[DataStore sharedStore] batchSaveTweetMessages:mut_arr];
     
-//    self.tweets = [self.tweets arrayByAddingObjectsFromArray:mut_arr];
     self.lastTweetIDs[username] = [mut_arr firstObject].tid;
     
     dispatch_group_leave(self.feedGroup);

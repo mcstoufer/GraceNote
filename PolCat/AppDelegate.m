@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "FlickrKit.h"
+#import "PoliticalTweetStream.h"
 
 @interface AppDelegate ()
 
@@ -43,8 +44,16 @@ static NSCache *_sharedCache;
     // Override point for customization after application launch.
 
     [[FlickrKit sharedFlickrKit] initializeWithAPIKey:kflickrKey sharedSecret:kflickrSec];
-    
+    [application setMinimumBackgroundFetchInterval:60*60]; //Fetch once an hour.
     return YES;
+}
+
+-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    PoliticalTweetStream *stream = [PoliticalTweetStream sharedStream];
+    [stream loadTweetsForStreamWithCompletion:^(BOOL complete) {
+        completionHandler((complete ? UIBackgroundFetchResultNewData : UIBackgroundFetchResultNoData));
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

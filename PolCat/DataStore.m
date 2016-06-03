@@ -71,19 +71,8 @@
     dispatch_async(self.saveQueue, ^{
         for (PoliticalTweet *tweet in tweets) {
             [TweetMessage tweetMessageFromTweet:tweet]; // Ignore return value.
-//            NSLog(@"%@", tweetMessage);
         }
         [self saveContext];
-//        NSError *error = nil;
-//        NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-//        if (managedObjectContext != nil) {
-//            if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-//                // Replace this implementation with code to handle the error appropriately.
-//                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//                NSLog(@"Error in saving changes to core data model:%@,\n%@", error.localizedDescription, [error userInfo]);
-//                abort();
-//            }
-//        }
     });
 }
 

@@ -14,7 +14,8 @@
 +(instancetype)newTweetMessage
 {
     DataStore *instance = [DataStore sharedStore];
-    return [NSEntityDescription insertNewObjectForEntityForName:@"TweetMessage" inManagedObjectContext:instance.managedObjectContext];
+    return [NSEntityDescription insertNewObjectForEntityForName:@"TweetMessage"
+                                         inManagedObjectContext:instance.managedObjectContext];
 }
 
 +(instancetype)tweetMessageFromTweet:(PoliticalTweet *)tweet

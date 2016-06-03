@@ -118,7 +118,7 @@
         };
         
         destination.streamCompletionBlock = streamCompletionBlock;
-        destination.tweetStream = [PoliticalTweetStream new];
+        destination.tweetStream = [PoliticalTweetStream sharedStream];
         [[Filters sharedFilters] setStates:statesOnly()];
         
         [[Filters sharedFilters] setParties:@[stringForPartyEnum(PartyDemocrat),
