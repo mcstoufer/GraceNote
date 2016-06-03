@@ -119,6 +119,8 @@
         
         destination.streamCompletionBlock = streamCompletionBlock;
         destination.tweetStream = [PoliticalTweetStream sharedStream];
+        // This should come from some external source.
+        destination.tweetStream.usernames = @[@"barackobama", @"hillaryclinton", @"berniesanders", @"realdonaldtrump"];
         [[Filters sharedFilters] setStates:statesOnly()];
         
         [[Filters sharedFilters] setParties:@[stringForPartyEnum(PartyDemocrat),

@@ -17,6 +17,4 @@
  */
 @interface PoliticalTweetStream: TweetStream
 
-+(instancetype)sharedStream;
-
 @end

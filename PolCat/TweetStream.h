@@ -35,11 +35,15 @@ typedef void(^FlickrImageCompletionBlock)(UIImage* image);
 /**
  *  @brief The list of tweets retrieved from Twitter.
  */
-@property (nonatomic, strong) NSArray *tweets;
+//@property (nonatomic, strong) NSArray *tweets;
 /**
  *  @brief The handle for talking to the Twitter API.
  */
 @property (nonatomic, strong) STTwitterAPI *feedHandle;
+@property (nonatomic, strong) NSArray <NSString *> *usernames;
+
++(instancetype)sharedStream;
+
 /**
  *  @brief Called when it is appropriate to star the (re)loading of Tweets.
  *
@@ -53,8 +57,8 @@ typedef void(^FlickrImageCompletionBlock)(UIImage* image);
  *
  *  @return The text for the given Tweet. Nil if the index is out of range.
  */
--(NSString *)titleForTweetAtIndex:(NSUInteger)index;
--(Tweet *)objectInTweetsAtIndex:(NSUInteger)index;
+//-(NSString *)titleForTweetAtIndex:(NSUInteger)index;
+//-(Tweet *)objectInTweetsAtIndex:(NSUInteger)index;
 /**
  *  @brief Cause the stream to start the lookup for the primary image of the tweet. 
  *  @discussion Subclasses will be required to implement this method and decice what/how to

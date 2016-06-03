@@ -45,7 +45,7 @@ static PoliticalTweetStream *_stream;
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _stream = [PoliticalTweetStream new];
+        _stream = [[self class] new];
     });
     return _stream;
 }
@@ -96,17 +96,10 @@ static PoliticalTweetStream *_stream;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
            
-            dispatch_group_enter(self.feedGroup);
-            [self populateTweetsForUsername:@"barackobama"];
-            
-            dispatch_group_enter(self.feedGroup);
-            [self populateTweetsForUsername:@"hillaryclinton"];
-            
-            dispatch_group_enter(self.feedGroup);
-            [self populateTweetsForUsername:@"berniesanders"];
-            
-            dispatch_group_enter(self.feedGroup);
-            [self populateTweetsForUsername:@"realdonaldtrump"];
+            for (NSString *username in self.usernames) {
+                dispatch_group_enter(self.feedGroup);
+                [self populateTweetsForUsername:username];
+            }
             
             // 60 seconds in nanoseonds.
             dispatch_time_t timeout = dispatch_time(DISPATCH_TIME_NOW, 60 * 1e9);

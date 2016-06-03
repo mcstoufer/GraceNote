@@ -30,7 +30,8 @@
     
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:self.refreshControl];
-    [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(refreshTable)
+                  forControlEvents:UIControlEventValueChanged];
     [NSFetchedResultsController deleteCacheWithName:@"TweetMessages"];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleBackgroundNotification:)
