@@ -10,6 +10,8 @@
 #import "UIImage+OvalPortrait.h"
 #import "PoliticalTweetStream.h"
 
+#define partyImagesMaxWidth 26.0
+
 @implementation TweeterTableViewCell
 
 /**
@@ -22,7 +24,8 @@
 {
     self.tweetTitle.text = tweetMessage.text;
     self.tweetImage.image = [UIImage imageNamed:@"Missing"];
-    self.auxImage.image = nil;
+    self.partySourceImage.image = nil;
+    self.partyIntentImage.image = nil;
     self.dateLabel.text = [NSDateFormatter localizedStringFromDate:tweetMessage.date
                                                          dateStyle:NSDateFormatterShortStyle
                                                          timeStyle:NSDateFormatterMediumStyle];
@@ -30,7 +33,13 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
        
         // A quick local lookup against tweet text. Result is cached in stream.
-        UIImage *auxImage = [PoliticalTweetStream auxImageForTweet:tweetMessage];
+        UIImage *partySourceImage = [PoliticalTweetStream auxImageForTweetMessage:tweetMessage];
+        
+        UIImage *partyIntentImage;
+        BOOL differentTargets = !([tweetMessage.partySource integerValue] == [tweetMessage.partyIntent integerValue]);
+        if (differentTargets) {
+            partyIntentImage = [PoliticalTweetStream partyIntentImageForTweetMessage:tweetMessage];
+        }
         
         /**
          *  @brief A more involved lookup that requires hitting the Flickr server (and possible OAuth prior)
@@ -45,10 +54,17 @@
                 if (image) {
                     self.tweetImage.image = image;
                 }
-                if (auxImage) {
-                    self.auxImage.image = auxImage;
+                if (partySourceImage || !differentTargets) {
+                    self.partySourceImage.image = partySourceImage;
+                    self.partySourceImageWidthConstraint.constant = partyImagesMaxWidth;
+                    self.partyIntentImage.hidden = YES;
+                } else {
+                    self.partySourceImageWidthConstraint.constant = partyImagesMaxWidth/2.0;
+                    self.partySourceImage.image = partySourceImage;
+                    self.partyIntentImage.image = partyIntentImage;
+                    self.partyIntentImage.hidden = NO;
                 }
-                [self setNeedsLayout];
+                [self layoutIfNeeded];
             });
         }];
     });

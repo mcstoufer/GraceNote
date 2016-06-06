@@ -646,11 +646,18 @@
                                             <color key="textColor" red="0.62745100259999997" green="0.69411766529999996" blue="0.72941178080000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q1m-Is-RMs">
-                                            <rect key="frame" x="565" y="22.5" width="25" height="25"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="q1m-Is-RMs" userLabel="Party Source Image">
+                                            <rect key="frame" x="565" y="26" width="26" height="26"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="MJM-dx-GwQ"/>
-                                                <constraint firstAttribute="height" constant="25" id="efP-Nk-vjL"/>
+                                                <constraint firstAttribute="width" constant="26" id="MJM-dx-GwQ"/>
+                                                <constraint firstAttribute="width" secondItem="q1m-Is-RMs" secondAttribute="height" multiplier="1:1" id="T9X-wd-EFj"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="LZI-sv-Ask" userLabel="Party Intent Image">
+                                            <rect key="frame" x="577" y="38" width="13" height="13"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="LZI-sv-Ask" secondAttribute="height" multiplier="1:1" id="EjP-mf-J4e"/>
+                                                <constraint firstAttribute="width" constant="13" id="yes-co-929"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
@@ -660,19 +667,22 @@
                                         <constraint firstAttribute="bottom" secondItem="7H0-VJ-8n9" secondAttribute="bottom" constant="3" id="89y-DD-Sfs"/>
                                         <constraint firstItem="7H0-VJ-8n9" firstAttribute="top" secondItem="nqD-nO-uYy" secondAttribute="top" constant="16" id="9dU-wT-RZ0"/>
                                         <constraint firstItem="4Mv-Li-6Dd" firstAttribute="leading" secondItem="nqD-nO-uYy" secondAttribute="leading" constant="10" id="AH3-9i-m3w"/>
-                                        <constraint firstItem="q1m-Is-RMs" firstAttribute="leading" secondItem="7H0-VJ-8n9" secondAttribute="trailing" constant="10" id="I8j-nn-Cq1"/>
+                                        <constraint firstItem="q1m-Is-RMs" firstAttribute="top" secondItem="NPQ-9t-8JO" secondAttribute="bottom" constant="10" id="DF0-vo-dTO"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="LZI-sv-Ask" secondAttribute="bottom" constant="10.5" id="FOF-G2-2Km"/>
                                         <constraint firstItem="7H0-VJ-8n9" firstAttribute="leading" secondItem="4Mv-Li-6Dd" secondAttribute="trailing" constant="10" id="LWC-rL-6ha"/>
-                                        <constraint firstItem="q1m-Is-RMs" firstAttribute="centerY" secondItem="nqD-nO-uYy" secondAttribute="centerY" id="RoW-ft-6L6"/>
-                                        <constraint firstAttribute="trailing" secondItem="q1m-Is-RMs" secondAttribute="trailing" constant="10" id="Ry1-1X-jUu"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="7H0-VJ-8n9" secondAttribute="trailing" constant="37" id="MEp-V6-49I"/>
+                                        <constraint firstAttribute="trailing" secondItem="LZI-sv-Ask" secondAttribute="trailing" constant="10" id="XHf-zN-rRn"/>
                                         <constraint firstItem="4Mv-Li-6Dd" firstAttribute="top" secondItem="nqD-nO-uYy" secondAttribute="top" constant="10" id="bGj-e1-o4P"/>
                                         <constraint firstAttribute="trailing" secondItem="NPQ-9t-8JO" secondAttribute="trailing" constant="10" id="paT-Cl-68V"/>
+                                        <constraint firstAttribute="trailing" secondItem="q1m-Is-RMs" secondAttribute="leading" constant="35" id="pij-EJ-TLZ"/>
                                         <constraint firstItem="NPQ-9t-8JO" firstAttribute="top" secondItem="nqD-nO-uYy" secondAttribute="top" constant="3" id="yEG-87-lkF"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="auxImage" destination="q1m-Is-RMs" id="JZt-fS-7Qn"/>
                                     <outlet property="dateLabel" destination="NPQ-9t-8JO" id="08L-G8-GUr"/>
+                                    <outlet property="partyIntentImage" destination="LZI-sv-Ask" id="Vo8-TX-Oy7"/>
+                                    <outlet property="partySourceImage" destination="q1m-Is-RMs" id="5gL-W9-7P8"/>
+                                    <outlet property="partySourceImageWidthConstraint" destination="MJM-dx-GwQ" id="Bvm-w7-Xxn"/>
                                     <outlet property="tweetImage" destination="4Mv-Li-6Dd" id="wcn-68-I6r"/>
                                     <outlet property="tweetTitle" destination="7H0-VJ-8n9" id="jzA-A5-4Us"/>
                                 </connections>

@@ -17,4 +17,6 @@
  */
 @interface PoliticalTweetStream: TweetStream
 
++(UIImage *)partyIntentImageForTweetMessage:(TweetMessage *)tweet;
+
 @end

@@ -23,7 +23,7 @@
 {
     [super viewDidLoad];
     self.stateDict = [NSMutableDictionary dictionaryWithCapacity:50];
-    self.stateDict = [[Filters sharedFilters] states];
+    self.stateDict = [[Filters sharedFilters] allStates];
     self.statesSort = [[self.stateDict allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString  *_Nonnull obj1, NSString *_Nonnull obj2) {
         return [obj1 compare:obj2];
     }];

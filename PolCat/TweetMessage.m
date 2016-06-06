@@ -53,14 +53,15 @@
     self.fillColor = [NSKeyedArchiver archivedDataWithRootObject:tweet.fillColor];
     self.retweeted = @(tweet.retweeted);
     self.liked = @(tweet.liked);
-    self.party = @(tweet.party);
+    self.partyIntent = @(tweet.partyIntent);
+    self.partySource = @(tweet.partySource);
     self.us_state = tweet.state;
     self.defaultTweetImage = [NSKeyedArchiver archivedDataWithRootObject:[tweet defaultTweetImage]];
 }
 
-- (id) valueForUndefinedKey:(NSString *)key
-{
-//    NSLog(@"Tried to find undefined key: %@", key);
-   return @"foo";
-} // valueForUndefinedKey
+//- (id) valueForUndefinedKey:(NSString *)key
+//{
+////    NSLog(@"Tried to find undefined key: %@", key);
+//   return @"foo";
+//} // valueForUndefinedKey
 @end

@@ -75,7 +75,7 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        [self.tweetStream loadTweetsForStreamWithCompletion:^(BOOL complete) {
+        [self.tweetStream loadTweetsForStreamWithCompletion:^(BOOL complete, NSUInteger count, UIBackgroundFetchResult result) {
             // TODO: How to handle when the timeout to fetch all the tweets fires and return NO here?
             // Refire off loading, display alert message?
             dispatch_async(dispatch_get_main_queue(), ^{

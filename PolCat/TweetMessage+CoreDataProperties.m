@@ -23,7 +23,8 @@
 @dynamic fillColor;
 @dynamic retweeted;
 @dynamic liked;
-@dynamic party;
+@dynamic partyIntent;
+@dynamic partySource;
 @dynamic us_state;
 @dynamic defaultTweetImage;
 

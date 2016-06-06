@@ -25,7 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSData *fillColor;
 @property (nullable, nonatomic, retain) NSNumber *retweeted;
 @property (nullable, nonatomic, retain) NSNumber *liked;
-@property (nullable, nonatomic, retain) NSNumber *party;
+@property (nullable, nonatomic, retain) NSNumber *partyIntent;
+@property (nullable, nonatomic, retain) NSNumber *partySource;
 @property (nullable, nonatomic, retain) NSString *us_state;
 @property (nullable, nonatomic, retain) NSData *defaultTweetImage;
 

@@ -45,14 +45,36 @@ static NSCache *_sharedCache;
 
     [[FlickrKit sharedFlickrKit] initializeWithAPIKey:kflickrKey sharedSecret:kflickrSec];
     [application setMinimumBackgroundFetchInterval:60*60]; //Fetch once an hour.
+    
+    UIUserNotificationSettings *notifySettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge categories:nil];
+    [application registerUserNotificationSettings:notifySettings];
+    
     return YES;
+}
+
+-(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    NSLog(@"%@", notificationSettings);
 }
 
 -(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     PoliticalTweetStream *stream = [PoliticalTweetStream sharedStream];
-    [stream loadTweetsForStreamWithCompletion:^(BOOL complete) {
-        completionHandler((complete ? UIBackgroundFetchResultNewData : UIBackgroundFetchResultNoData));
+    [stream loadTweetsForStreamWithCompletion:^(BOOL complete, NSUInteger count, UIBackgroundFetchResult result) {
+        
+       UIUserNotificationSettings *settings = [application currentUserNotificationSettings];
+        if (result == UIBackgroundFetchResultNewData &&
+            settings.types & UIUserNotificationTypeAlert) {
+            
+            UILocalNotification *localNotify = [UILocalNotification new];
+            localNotify.alertTitle = [NSString stringWithFormat:@"PolCat has %lu items", count];
+            localNotify.alertTitle = @"New politically charged tweets await you!";
+            localNotify.alertAction = @"Go";
+            localNotify.applicationIconBadgeNumber = count;
+            
+            [application presentLocalNotificationNow:localNotify];
+        }
+        completionHandler(result);
     }];
 }
 

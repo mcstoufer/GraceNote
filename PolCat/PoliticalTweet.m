@@ -18,7 +18,7 @@
 
 -(UIImage *)defaultTweetImage
 {
-    if (self.party != PartyUndefined) {
+    if (self.partyIntent != PartyUndefined) {
         return [UIImage imageNamed:[self partyAsString]];
     }
     return nil;
@@ -26,7 +26,7 @@
 
 -(NSString *)partyAsString
 {
-    switch (self.party) {
+    switch (self.partyIntent) {
         case PartyDemocrat:
             return @"Democrat";
             break;

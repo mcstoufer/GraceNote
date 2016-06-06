@@ -33,7 +33,7 @@
 @property (nonatomic, strong) NSCompoundPredicate *republicanPredicate;
 
 @property (nonatomic, strong) NSMutableDictionary *lastTweetIDs;
-
+@property (nonatomic, assign) NSUInteger lastTweetFetchCount;
 @end
 
 
@@ -67,14 +67,14 @@ static PoliticalTweetStream *_stream;
         
         // Common trending democrat words
         NSMutableArray *predicates = [NSMutableArray new];
-        for (NSString *keyword in [[Filters sharedFilters] keywordsForParty:PartyDemocrat]) {
+        for (NSString *keyword in [[Filters sharedFilters] filteredKeywordsForParty:PartyDemocrat]) {
             [predicates addObject:[NSPredicate predicateWithFormat:@"self contains[cd] %@", keyword]];
         }
         self.democratPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
         
         // Common trending republican words. Rather small!
         [predicates removeAllObjects];
-        for (NSString *keyword in [[Filters sharedFilters] keywordsForParty:PartyRepublican]) {
+        for (NSString *keyword in [[Filters sharedFilters] filteredKeywordsForParty:PartyRepublican]) {
             [predicates addObject:[NSPredicate predicateWithFormat:@"self contains[cd] %@", keyword]];
         }
         self.republicanPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
@@ -106,13 +106,16 @@ static PoliticalTweetStream *_stream;
             long success = dispatch_group_wait(self.feedGroup, timeout);
             
             if (complete) {
-                complete(success == 0);
+                complete(success == 0,
+                         self.lastTweetFetchCount,
+                         (success > 0 ? UIBackgroundFetchResultFailed : (self.lastTweetFetchCount > 0 ? UIBackgroundFetchResultNewData : UIBackgroundFetchResultNoData)));
+                self.lastTweetFetchCount = 0;
             }
         });
         
     } errorBlock:^(NSError *error) {
         NSLog(@"Failed to verify credentials: %@", error.localizedDescription);
-        complete(NO);
+        complete(NO, 0, UIBackgroundFetchResultFailed);
     }];
 }
 
@@ -209,7 +212,7 @@ static PoliticalTweetStream *_stream;
     }
     
     UIImage *aux;
-    switch ((Party)[tweet.party integerValue]) {
+    switch ((Party)[tweet.partySource integerValue]) {
         case PartyDemocrat:
             aux= [UIImage imageNamed:@"Democrat"];
             break;
@@ -226,6 +229,34 @@ static PoliticalTweetStream *_stream;
             break;
     }
     [[AppDelegate sharedCache] setObject:aux forKey:tweet.text];
+    return aux;
+}
+
++(UIImage *)partyIntentImageForTweetMessage:(TweetMessage *)tweet
+{
+    NSString *key = [NSString stringWithFormat:@"partyIntent_%@", tweet.partyIntent];
+    if ([[AppDelegate sharedCache] objectForKey:key]) {
+        return [[AppDelegate sharedCache] objectForKey:key];
+    }
+    
+    UIImage *aux;
+    switch ((Party)[tweet.partyIntent integerValue]) {
+        case PartyDemocrat:
+            aux= [UIImage imageNamed:@"Democrat"];
+            break;
+            
+        case PartyRepublican:
+            aux= [UIImage imageNamed:@"Republican"];
+            break;
+            
+        case PartyOther:
+            aux= [UIImage imageNamed:@"OtherParty"];
+            break;
+            
+        default:
+            break;
+    }
+    [[AppDelegate sharedCache] setObject:aux forKey:key];
     return aux;
 }
 
@@ -287,24 +318,44 @@ static PoliticalTweetStream *_stream;
  *  @return A party affiliation or nil otherwise. This is possible if none of the compound predicates caused a
  *           hit.
  */
--(Party)possiblePartyFromTweet:(PoliticalTweet *)tweet
+-(Party)possiblePartyIntentFromTweet:(PoliticalTweet *)tweet
 {
-    if (tweet.party) {
-        return tweet.party;
+    if (tweet.partyIntent) {
+        return tweet.partyIntent;
     }
     
     NSArray *arr = @[tweet.text];
     NSArray *usr = @[tweet.username];
     // Scan text of tweet first to see if there is an obvious party affiliation mentioned.
-    if (([arr filteredArrayUsingPredicate:self.democratPredicate].count + [usr filteredArrayUsingPredicate:self.democratPredicate].count) > 0) {
-        tweet.party = PartyDemocrat;
+    if (([arr filteredArrayUsingPredicate:self.democratPredicate].count +
+         [usr filteredArrayUsingPredicate:self.democratPredicate].count) > 0) {
+        tweet.partyIntent = PartyDemocrat;
         return PartyDemocrat;
-    } else if (([arr filteredArrayUsingPredicate:self.republicanPredicate].count + [usr filteredArrayUsingPredicate:self.republicanPredicate].count) > 0) {
-        tweet.party = PartyRepublican;
+    } else if (([arr filteredArrayUsingPredicate:self.republicanPredicate].count +
+                [usr filteredArrayUsingPredicate:self.republicanPredicate].count) > 0) {
+        tweet.partyIntent = PartyRepublican;
         return PartyRepublican;
     }
     
-    tweet.party = PartyOther;
+    tweet.partyIntent = PartyOther;
+    return PartyOther;
+}
+
+-(Party)possiblePartySourceFromTweet:(PoliticalTweet *)tweet
+{
+    NSArray *usr = @[tweet.username];
+
+    if (([usr filteredArrayUsingPredicate:self.democratPredicate].count) > 0) {
+//        tweet.partyIntent = PartyDemocrat;
+        return PartyDemocrat;
+    } else if (([usr filteredArrayUsingPredicate:self.republicanPredicate].count) > 0) {
+//        tweet.partyIntent = PartyRepublican;
+        return PartyRepublican;
+    }
+    
+//    tweet.partyIntent = PartyOther;
+//    return PartyOther;
+
     return PartyOther;
 }
 
@@ -316,23 +367,15 @@ static PoliticalTweetStream *_stream;
  */
 -(void)populateTweetsForUsername:(NSString  *)username
 {
-    if (self.lastTweetIDs[username]) {
-        [self.feedHandle getUserTimelineWithScreenName:username
-                                               sinceID:self.lastTweetIDs[username]
-                                                 maxID:nil count:20
-                                          successBlock:^(NSArray *statuses) {
-                                              [self addRawTweetsToStream:statuses forUsername:username];
-                                          } errorBlock:^(NSError *error) {
-                                              [self handleTweetFetchError:error forUsername:username];
-                                          }];
-    } else {
-        [self.feedHandle getUserTimelineWithScreenName:username
-                                          successBlock:^(NSArray *statuses) {
-                                              [self addRawTweetsToStream:statuses forUsername:username];
-                                          } errorBlock:^(NSError *error) {
-                                              [self handleTweetFetchError:error forUsername:username];
-                                          }];
-    }
+    [self.feedHandle getUserTimelineWithScreenName:username
+                                           sinceID:(self.lastTweetIDs[username] ?: nil)
+                                             maxID:nil
+                                             count:20
+                                      successBlock:^(NSArray *statuses) {
+                                          [self addRawTweetsToStream:statuses forUsername:username];
+                                      } errorBlock:^(NSError *error) {
+                                          [self handleTweetFetchError:error forUsername:username];
+                                      }];
 }
 
 -(void)addRawTweetsToStream:(NSArray *)statuses forUsername:(NSString  *)username
@@ -340,7 +383,8 @@ static PoliticalTweetStream *_stream;
     NSMutableArray <PoliticalTweet *> *mut_arr = [NSMutableArray array];
     for (NSDictionary *status in statuses) {
         PoliticalTweet *tweet = [[PoliticalTweet alloc] initTweetWithDict:status];
-        tweet.party = [self possiblePartyFromTweet:tweet];
+        tweet.partyIntent = [self possiblePartyIntentFromTweet:tweet];
+        tweet.partySource = [self possiblePartySourceFromTweet:tweet];
         [mut_arr addObject:tweet];
     }
     [[DataStore sharedStore] batchSaveTweetMessages:mut_arr];

@@ -25,9 +25,12 @@
  *  @brief The "Auxiliary" image used for display in the cell This may be used, or not. This
  *          image should play a secondary role in describing the intent of the content of this cell.
  */
-@property (nonatomic, weak) IBOutlet UIImageView *auxImage;
+@property (nonatomic, weak) IBOutlet UIImageView *partySourceImage;
+@property (nonatomic, weak) IBOutlet UIImageView *partyIntentImage;
 
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *partySourceImageWidthConstraint;
 
 -(void)configureCellWithTweetMessage:(TweetMessage *)tweetMessage;
 @end

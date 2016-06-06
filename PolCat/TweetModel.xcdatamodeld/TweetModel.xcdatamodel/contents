@@ -6,7 +6,8 @@
         <attribute name="fillColor" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="likeCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="liked" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
-        <attribute name="party" optional="YES" attributeType="Integer 16" defaultValueString="4" syncable="YES"/>
+        <attribute name="partyIntent" optional="YES" attributeType="Integer 16" defaultValueString="4" syncable="YES"/>
+        <attribute name="partySource" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="retweeted" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="rtCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
@@ -19,11 +20,11 @@
                 <index value="tid"/>
                 <index value="us_state"/>
                 <index value="username"/>
-                <index value="party"/>
+                <index value="partyIntent"/>
             </compoundIndex>
         </compoundIndexes>
     </entity>
     <elements>
-        <element name="TweetMessage" positionX="-63" positionY="-18" width="128" height="238"/>
+        <element name="TweetMessage" positionX="630" positionY="2384" width="135" height="253"/>
     </elements>
 </model>

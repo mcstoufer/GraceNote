@@ -18,7 +18,9 @@
  *
  *  @param complete If the load of feeds was successful. A value of NO means the internal timeout fired. It is up to the code block to decide how to handle this state.
  */
-typedef void(^TweetFeedCompletionBlock)(BOOL complete);
+typedef void(^TweetFeedCompletionBlock)(BOOL complete,
+                                        NSUInteger count,
+                                        UIBackgroundFetchResult result);
 /**
  *  @brief A block definition to handle code execution for when Flickr image(s) are completely loaded and available.
  *
@@ -78,6 +80,6 @@ typedef void(^FlickrImageCompletionBlock)(UIImage* image);
  *
  *  @return The aux image or nil if one could not be resolved given the tweet.
  */
-+(UIImage *)auxImageForTweet:(TweetMessage *)tweet;
++(UIImage *)auxImageForTweetMessage:(TweetMessage *)tweet;
 
 @end

@@ -16,7 +16,8 @@
 /**
  *  @brief Some general party affilication that best aligns with the intent of the tweet. Not who posted it.
  */
-@property (nonatomic, assign) Party party;
+@property (nonatomic, assign) Party partyIntent;
+@property (nonatomic, assign) Party partySource;
 /**
  *  @brief If the tweet mentioned a state, we extract that during the first
  *          time this tweet is displayed and save it here.

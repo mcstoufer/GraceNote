@@ -39,6 +39,20 @@
     return self;
 }
 
+-(NSPredicate *)filteredPredicate
+{
+    NSMutableArray *filterPredicates = [NSMutableArray array];
+    [filterPredicates addObject:[NSPredicate predicateWithFormat:@"NOT (us_state IN %@)",
+                                 [self excludedStates]]];
+    [filterPredicates addObject:[NSPredicate predicateWithFormat:@"NOT (party in %@)",
+                                 [self excludedParties]]];
+    
+    NSCompoundPredicate *compoundFilterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:filterPredicates];
+    
+    return compoundFilterPredicate;
+}
+
+#pragma mark - States
 -(void)setStates:(NSArray<NSString *> *)us_states
 {
     NSMutableDictionary *dict = self.masterDict[kFilterStates];
@@ -53,11 +67,45 @@
     }
 }
 
--(NSMutableDictionary <NSString *, id> *)states
+-(NSMutableDictionary <NSString *, id> *)allStates
 {
     return self.masterDict[kFilterStates];
 }
 
+-(NSArray <NSString *> *)filteredStates
+{
+    NSMutableDictionary *dict = [self.masterDict[kFilterStates] mutableCopy];
+    [dict removeObjectsForKeys:[self excludedStates]];
+    return [dict allKeys];
+}
+
+-(NSArray<NSString *> *)excludedStates
+{
+    NSMutableArray *mutArr = [NSMutableArray array];
+    [self.masterDict[kFilterStates] enumerateKeysAndObjectsUsingBlock:^(NSString *_Nonnull key,
+                                                                        NSNumber *_Nonnull obj,
+                                                                        BOOL * _Nonnull stop) {
+        if ( ![obj boolValue]) {
+            [mutArr addObject:key];
+        }
+    }];
+    return mutArr;
+}
+
+-(void)updateStates:(NSDictionary<NSString *,NSNumber *> *)us_states
+{
+    NSMutableDictionary *dict = self.masterDict[kFilterStates];
+    [us_states enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key,
+                                                   NSNumber * _Nonnull obj,
+                                                   BOOL * _Nonnull stop) {
+        [dict setObject:obj forKey:key];
+    }];
+    
+    NSMutableDictionary *filters = [[UserDefaults standardUserDefaults] filterSettings][kFilterStates] = [dict copy];
+    [[UserDefaults standardUserDefaults] setFilterSettings:filters];
+}
+
+#pragma mark - Parties
 -(void)setParties:(NSArray<NSString *> *)parties
 {
     NSMutableDictionary *dict = self.masterDict[kFilterParties];
@@ -103,6 +151,26 @@
     }
 }
 
+-(void)updateSelectedParties:(NSDictionary<NSString *,NSNumber *> *)parties
+{
+    NSMutableDictionary *dict = self.masterDict[kFilterParties];
+    [parties enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSNumber * _Nonnull obj, BOOL * _Nonnull stop) {
+        [dict setObject:obj forKey:key];
+    }];
+    
+    NSMutableDictionary *filters = [[UserDefaults standardUserDefaults] filterSettings];
+    filters[kFilterParties] = [dict copy];
+    [[UserDefaults standardUserDefaults] setFilterSettings:filters];
+}
+
+-(NSArray<NSNumber *> *)excludedParties
+{
+    return [[self.parties allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSNumber *_Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        return ![evaluatedObject boolValue];
+    }]];
+}
+
+#pragma mark Keywords
 -(void)setKeywords:(NSArray<NSString *> *)keywords forParty:(Party)party
 {
     NSString *key = stringForPartyEnum(party);
@@ -133,32 +201,27 @@
     [[UserDefaults standardUserDefaults] setFilterSettings:filters];
 }
 
--(NSMutableDictionary<NSString *,NSNumber *> *)keywordsForParty:(Party)party
+-(NSMutableDictionary<NSString *,NSNumber *> *)allKeywordsForParty:(Party)party
 {
     return self.masterDict[kFilterKeywords][stringForPartyEnum(party)];
 }
 
--(void)updateStates:(NSDictionary<NSString *,NSNumber *> *)us_states
+-(NSArray<NSString *> *)filteredKeywordsForParty:(Party)party
 {
-    NSMutableDictionary *dict = self.masterDict[kFilterStates];
-    [us_states enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSNumber * _Nonnull obj, BOOL * _Nonnull stop) {
-        [dict setObject:obj forKey:key];
-    }];
-    
-    NSMutableDictionary *filters = [[UserDefaults standardUserDefaults] filterSettings][kFilterStates] = [dict copy];
-    [[UserDefaults standardUserDefaults] setFilterSettings:filters];
+    NSMutableDictionary *dict = [self.masterDict[kFilterKeywords][stringForPartyEnum(party)] mutableCopy];
+    [dict removeObjectsForKeys:[self excludedKeywordsForParty:party]];
+    return [dict allKeys];
 }
 
--(void)updateSelectedParties:(NSDictionary<NSString *,NSNumber *> *)parties
+-(NSArray<NSString *> *)excludedKeywordsForParty:(Party)party
 {
-    NSMutableDictionary *dict = self.masterDict[kFilterParties];
-    [parties enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSNumber * _Nonnull obj, BOOL * _Nonnull stop) {
-        [dict setObject:obj forKey:key];
+    NSMutableArray *mutArr = [NSMutableArray array];
+    [self.masterDict[kFilterKeywords][stringForPartyEnum(party)] enumerateKeysAndObjectsUsingBlock:^(NSString *_Nonnull key, NSNumber *_Nonnull obj, BOOL * _Nonnull stop) {
+        if ( ![obj boolValue]) {
+            [mutArr addObject:key];
+        }
     }];
-    
-    NSMutableDictionary *filters = [[UserDefaults standardUserDefaults] filterSettings];
-    filters[kFilterParties] = [dict copy];
-    [[UserDefaults standardUserDefaults] setFilterSettings:filters];
+    return mutArr;
 }
 
 -(void)updateKeywords:(NSDictionary <NSString *, NSNumber *> *)keywords forParty:(Party)party
@@ -177,88 +240,4 @@
     filters[kFilterKeywords] = keywordsFilter;
     [[UserDefaults standardUserDefaults] setFilterSettings:filters];
 }
-
--(NSPredicate *)filteredPredicate
-{
-    NSMutableArray *filterPredicates = [NSMutableArray array];
-    [filterPredicates addObject:[NSPredicate predicateWithFormat:@"NOT (us_state IN %@)", [self excludedStates]]];
-    [filterPredicates addObject:[NSPredicate predicateWithFormat:@"NOT (party in %@)", [self excludedParties]]];
-    [filterPredicates addObject:[NSPredicate predicateWithFormat:@"NOT (keywords in %@)", [self excludedKeywords]]];
-    
-    NSCompoundPredicate *compoundFilterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:filterPredicates];
-    
-    return compoundFilterPredicate;
-}
-
--(NSArray<NSString *> *)excludedStates
-{
-    return @[];
-}
-
--(NSArray<NSString *> *)excludedParties
-{
-    return @[];
-}
-
--(NSArray<NSString *> *)excludedKeywords
-{
-    return @[];
-}
-
-/*
- 
- -(void)toggleStateFilter:(NSString *)us_state state:(BOOL)state
- {
- [[NSUserDefaults standardUserDefaults] setBool:state forKey:us_state];
- [[NSUserDefaults standardUserDefaults] synchronize];
- }
- 
- -(void)toggleStateFilters:(NSDictionary <NSString *, NSNumber *> *)us_states
- {
- [us_states enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSNumber * _Nonnull obj, BOOL * _Nonnull stop) {
- [[NSUserDefaults standardUserDefaults] setBool:[obj boolValue] forKey:key];
- }];
- [[NSUserDefaults standardUserDefaults] synchronize];
- }
- 
- -(BOOL)selectedState:(NSString *)us_state
- {
- if (![[NSUserDefaults standardUserDefaults] objectForKey:us_state]) {
- [self toggleStateFilter:us_state state:YES];
- return YES;
- }
- return [[[NSUserDefaults standardUserDefaults] objectForKey:us_state] boolValue];
- }
- 
- -(void)setKeywords:(NSArray<NSString *> *)keywords forParty:(Party)party
- {
- NSString *key = [NSString stringWithFormat:@"%@_keywords", stringForPartyEnum(party)];
- [[NSUserDefaults standardUserDefaults] setObject:keywords forKey:key];
- [[NSUserDefaults standardUserDefaults] synchronize];
- }
- 
- -(NSArray<NSString *> *)keywordsForParty:(Party)party
- {
- NSString *key = [NSString stringWithFormat:@"%@_keywords", stringForPartyEnum(party)];
- return [[NSUserDefaults standardUserDefaults] objectForKey:key];
- }
- 
- -(void)toggleKeywordFilters:(NSDictionary<NSString *,NSNumber *> *)keywords
- {
- [keywords enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSNumber * _Nonnull obj, BOOL * _Nonnull stop) {
- [[NSUserDefaults standardUserDefaults] setBool:[obj boolValue] forKey:key];
- }];
- [[NSUserDefaults standardUserDefaults] synchronize];
- }
- 
- -(BOOL)selectedKeyword:(NSString *)keyword
- {
- if (![[NSUserDefaults standardUserDefaults] objectForKey:keyword]) {
- [[NSUserDefaults standardUserDefaults] setBool:YES forKey:keyword];
- return YES;
- }
- return [[[NSUserDefaults standardUserDefaults] objectForKey:keyword] boolValue];
- }
- */
 @end
-

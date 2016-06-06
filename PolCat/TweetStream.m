@@ -44,7 +44,7 @@
     return;
 }
 
-+(UIImage *)auxImageForTweet:(TweetMessage *)tweet
++(UIImage *)auxImageForTweetMessage:(TweetMessage *)tweet
 {
     return nil;
 }

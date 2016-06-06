@@ -15,16 +15,18 @@
 +(instancetype)sharedFilters;
 
 -(void)setStates:(NSArray <NSString *> *)us_states;
--(NSMutableDictionary <NSString *, id> *)states;
+-(NSMutableDictionary <NSString *, id> *)allStates;
+-(NSArray <NSString *> *)filteredStates;
 -(NSArray <NSString *> *)excludedStates;
 
 -(void)setParties:(NSArray <NSString *> *)parties;
 -(NSDictionary <NSString *, NSNumber *> *)parties;
--(NSArray <NSString *> *)excludedParties;
+-(NSArray <NSNumber *> *)excludedParties;
 
 -(void)setKeywords:(NSArray <NSString *> *)keywords forParty:(Party)party;
--(NSMutableDictionary <NSString *, NSNumber *> *)keywordsForParty:(Party)party;
--(NSArray <NSString *> *)excludedKeywords;
+-(NSMutableDictionary <NSString *, NSNumber *> *)allKeywordsForParty:(Party)party;
+-(NSArray<NSString *> *)filteredKeywordsForParty:(Party)party;
+-(NSArray <NSString *> *)excludedKeywordsForParty:(Party)party;
 
 -(void)updateStates:(NSDictionary <NSString *, NSNumber *> *)us_states;
 -(void)updateSelectedParties:(NSDictionary <NSString *, NSNumber *> *)parties;
@@ -35,17 +37,4 @@
 
 - (void)togglePartyFilter:(Party)party state:(BOOL)state;
 - (BOOL)stateForPartyFilter:(Party)party;
-  /*
- - (void)toggleStateFilter:(NSString *)us_state state:(BOOL)state;
- - (void)toggleStateFilters:(NSDictionary <NSString *, NSNumber *> *)us_states;
- - (BOOL)selectedState:(NSString *)us_state;
- 
- - (void)setKeywords:(NSArray <NSString *> *)keywords forParty:(Party)party;
- 
- - (NSArray <NSString *> *)keywordsForParty:(Party)party;
- 
- - (void)toggleKeywordFilters:(NSDictionary <NSString *, NSNumber *> *)keywords;
- -(BOOL)selectedKeyword:(NSString *)keyword;
- */
-
 @end

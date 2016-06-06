@@ -26,8 +26,8 @@
     [super viewDidLoad];
     self.keywordsDict = [NSMutableDictionary dictionaryWithCapacity:2];
     
-    self.keywordsDict[@"Democrat"] = [[Filters sharedFilters] keywordsForParty:PartyDemocrat];
-    self.keywordsDict[@"Republican"] = [[Filters sharedFilters] keywordsForParty:PartyRepublican];
+    self.keywordsDict[@"Democrat"] = [[Filters sharedFilters] allKeywordsForParty:PartyDemocrat];
+    self.keywordsDict[@"Republican"] = [[Filters sharedFilters] allKeywordsForParty:PartyRepublican];
     
     UICollectionViewFlowLayout *collectionViewLayout = (UICollectionViewFlowLayout*)self.collection.collectionViewLayout;
     collectionViewLayout.sectionInset = UIEdgeInsetsMake(20, 5, 20, 5);
