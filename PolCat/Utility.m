@@ -80,6 +80,7 @@ NSOrderedSet *states()
                    @"Oklahoma", @"OK",
                    @"Oregon", @"OR",
                    @"Pennsylvania", @"PA",
+                   @"Puerto Rico", @"PR",
                    @"Rhode Island", @"RI",
                    @"South Carolina", @"SC",
                    @"South Dakota", @"SD",
@@ -88,6 +89,7 @@ NSOrderedSet *states()
                    @"Utah", @"UT",
                    @"Vermont", @"VT",
                    @"Virginia", @"VA",
+                   @"Virgin Islands", @"VI",
                    @"Washington", @"WA",
                    @"West Virginia", @"WV",
                    @"Wisconsin", @"WI",
@@ -102,7 +104,7 @@ NSArray *statesOnly()
     static dispatch_once_t statesOnlyToken;
     dispatch_once(&statesOnlyToken, ^{
         
-        NSMutableArray *mutArr = [NSMutableArray arrayWithCapacity:50];
+        NSMutableArray *mutArr = [NSMutableArray arrayWithCapacity:52];
         NSOrderedSet *__states = states();
         for (int x=0; x<__states.count; x+=2) {
             [mutArr addObject:__states[x]];

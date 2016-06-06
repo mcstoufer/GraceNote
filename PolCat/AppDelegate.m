@@ -54,7 +54,7 @@ static NSCache *_sharedCache;
 
 -(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
-    NSLog(@"%@", notificationSettings);
+//    NSLog(@"%@", notificationSettings);
 }
 
 -(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler

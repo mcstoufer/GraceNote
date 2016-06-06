@@ -9,8 +9,15 @@
 #import "TweeterTableViewCell.h"
 #import "UIImage+OvalPortrait.h"
 #import "PoliticalTweetStream.h"
+#import "AppDelegate.h"
 
 #define partyImagesMaxWidth 26.0
+
+@interface TweeterTableViewCell ()
+
+@property (nonatomic, strong) NSString *tid;
+
+@end
 
 @implementation TweeterTableViewCell
 
@@ -29,9 +36,11 @@
     self.dateLabel.text = [NSDateFormatter localizedStringFromDate:tweetMessage.date
                                                          dateStyle:NSDateFormatterShortStyle
                                                          timeStyle:NSDateFormatterMediumStyle];
+    self.tid = tweetMessage.tid;
+    
     // Pull off loading of images from main thread.
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-       
+        
         // A quick local lookup against tweet text. Result is cached in stream.
         UIImage *partySourceImage = [PoliticalTweetStream auxImageForTweetMessage:tweetMessage];
         
@@ -41,33 +50,55 @@
             partyIntentImage = [PoliticalTweetStream partyIntentImageForTweetMessage:tweetMessage];
         }
         
-        /**
-         *  @brief A more involved lookup that requires hitting the Flickr server (and possible OAuth prior)
-         *
-         *  @param image The image that the lookup resolved. May be nil.
+        /* Check to see if the image for the state has been retrieved before and chached. Speeds up recall greatly.
+         * If there is any completion block to execute once we have the image, execute it now.
          */
-        [PoliticalTweetStream primaryImageForTweet:tweetMessage withCompletion:^(UIImage *image) {
-            image = [image resizeWithSize:self.tweetImage.frame.size];
-            // Once complete, re-dispatch on main thread so images can be set properly.
+        if ([[AppDelegate sharedCache] objectForKey:tweetMessage.us_state]) {
+            UIImage *img = [[AppDelegate sharedCache] objectForKey:tweetMessage.us_state];
             dispatch_async(dispatch_get_main_queue(), ^{
-                
-                if (image) {
-                    self.tweetImage.image = image;
+                if ([self.tid isEqualToString:tweetMessage.tid]) {
+                    self.tweetImage.image = img;
                 }
-                if (partySourceImage || !differentTargets) {
-                    self.partySourceImage.image = partySourceImage;
-                    self.partySourceImageWidthConstraint.constant = partyImagesMaxWidth;
-                    self.partyIntentImage.hidden = YES;
-                } else {
-                    self.partySourceImageWidthConstraint.constant = partyImagesMaxWidth/2.0;
-                    self.partySourceImage.image = partySourceImage;
-                    self.partyIntentImage.image = partyIntentImage;
-                    self.partyIntentImage.hidden = NO;
-                }
-                [self layoutIfNeeded];
             });
-        }];
+        } else {
+            /**
+             *  @brief A more involved lookup that requires hitting the Flickr server (and possible OAuth prior)
+             *
+             *  @param image The image that the lookup resolved. May be nil.
+             */
+            [PoliticalTweetStream primaryImageForTweet:tweetMessage withCompletion:^(UIImage *image) {
+                image = [image resizeWithSize:self.tweetImage.frame.size];
+                // Once complete, re-dispatch on main thread so images can be set properly.
+                if (image) {
+                    [[AppDelegate sharedCache] setObject:image forKey:tweetMessage.us_state];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if ([self.tid isEqualToString:tweetMessage.tid]) {
+                            self.tweetImage.image = image;
+                        }
+                    });
+                }
+            }];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([self.tid isEqualToString:tweetMessage.tid]) {
+                [self populateSourceImage:partySourceImage withPartyIntentImage:partyIntentImage withDifferingTargets:differentTargets];
+            }
+        });
     });
 }
 
+-(void)populateSourceImage:(UIImage *)partySourceImage withPartyIntentImage:(UIImage *)partyIntentImage withDifferingTargets:(BOOL)differentTargets
+{
+    if (partySourceImage && !differentTargets) {
+        self.partySourceImage.image = partySourceImage;
+        self.partySourceImageWidthConstraint.constant = partyImagesMaxWidth;
+        self.partyIntentImage.hidden = YES;
+    } else {
+        self.partySourceImageWidthConstraint.constant = partyImagesMaxWidth/2.0;
+        self.partySourceImage.image = partySourceImage;
+        self.partyIntentImage.image = partyIntentImage;
+        self.partyIntentImage.hidden = NO;
+    }
+    [self layoutIfNeeded];
+}
 @end

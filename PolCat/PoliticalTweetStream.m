@@ -123,60 +123,44 @@ static PoliticalTweetStream *_stream;
 {
     NSString *state = tweet.us_state;
     if (state) {
-        /* Check to see if the image for the state has been retrieved before and chached. Speeds up recall greatly.
-         * If there is any completion block to execute once we have the image, execute it now.
-         */
-        if ([[AppDelegate sharedCache] objectForKey:state]) {
-            UIImage *img = [[AppDelegate sharedCache] objectForKey:state];
-            if (complete) {
-                complete(img);
-            }
-        }
         /*  Otherwise, we need to fire up a Flicker search and attempt to pull down something useful.
          *  Again, cache valid result and execute completion block with image.
          */
-        else {
-            FKFlickrPhotosSearch *search = [[FKFlickrPhotosSearch alloc] init];
-            search.text = tweet.text;
-            search.tags = @"California";
-            search.per_page = @"15";
-            [[FlickrKit sharedFlickrKit] call:search completion:^(NSDictionary *response, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (response) {
-                        
-                        /* So unfortunate to have to hack this last bit. I was unable to find a reliable
-                         *  query set of text & tags that would always bring back an image that was easily 
-                         *  identifiable for the state. 
-                         * We punt here and just do a straight lookup against a known set of URLs that bring
-                         *  back a flag pic.
-                         */
-//                        NSMutableArray *photoURLs = [NSMutableArray array];
-//                        for (NSDictionary *photoDictionary in [response valueForKeyPath:@"photos.photo"]) {
-//                            NSURL *url = [[FlickrKit sharedFlickrKit] photoURLForSize:FKPhotoSizeSmallSquare75 fromPhotoDictionary:photoDictionary];
-//                            [photoURLs addObject:url];
-//                        }
-                        // NOTE: A NSAppTransportSecurity exception was made in the Info.plist to allow this HTTP traffic.
-                        NSURL *flagUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http:i.infopls.com/images/%@_fl.gif", [[self stateAbbv:state] lowercaseString]]];
+        FKFlickrPhotosSearch *search = [[FKFlickrPhotosSearch alloc] init];
+        search.text = tweet.text;
+        search.tags = @"California";
+        search.per_page = @"15";
+        [[FlickrKit sharedFlickrKit] call:search completion:^(NSDictionary *response, NSError *error) {
+            if (response) {
+                
+                /* So unfortunate to have to hack this last bit. I was unable to find a reliable
+                 *  query set of text & tags that would always bring back an image that was easily
+                 *  identifiable for the state.
+                 * We punt here and just do a straight lookup against a known set of URLs that bring
+                 *  back a flag pic.
+                 */
+                //                        NSMutableArray *photoURLs = [NSMutableArray array];
+                //                        for (NSDictionary *photoDictionary in [response valueForKeyPath:@"photos.photo"]) {
+                //                            NSURL *url = [[FlickrKit sharedFlickrKit] photoURLForSize:FKPhotoSizeSmallSquare75 fromPhotoDictionary:photoDictionary];
+                //                            [photoURLs addObject:url];
+                //                        }
+                // NOTE: A NSAppTransportSecurity exception was made in the Info.plist to allow this HTTP traffic.
+                NSURL *flagUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.crwflags.com/art/states/%@75.gif", [[self stateAbbv:state] lowercaseString]]];
+                
+                NSData *flagData = [NSData dataWithContentsOfURL:flagUrl options:NSDataReadingMappedAlways error:nil];
+                UIImage *flag = [UIImage imageWithData:flagData];
 
-                        NSData *flagData = [NSData dataWithContentsOfURL:flagUrl options:NSDataReadingMappedAlways error:nil];
-                        UIImage *flag = [UIImage imageWithData:flagData];
-                        
-                        if (flag) {
-                            [[AppDelegate sharedCache] setObject:flag forKey:state];
-                        }
-                        if (complete) {
-                            complete(flag);
-                        }
-                    } else {
-                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-                        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-                        [alert addAction:okAction];
-                        
-                        [[self topMostController] presentViewController:alert animated:YES completion:nil];
-                    }
-                });
-            }];
-        }
+                if (complete) {
+                    complete(flag);
+                }
+            } else {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+                [alert addAction:okAction];
+                
+                [[self topMostController] presentViewController:alert animated:YES completion:nil];
+            }
+        }];
     }
     /* If no state could be resolved, then we just leave the placeholder image in the cell. */
     else {
@@ -275,11 +259,10 @@ static PoliticalTweetStream *_stream;
         return tweet.state;
     }
     
-    NSArray *split = [tweet.text splitWords];
-    for (NSString *word in split) {
-        if ([states() containsObject:word]) {
-            tweet.state = word;
-            return word;
+    for (NSString *us_state in statesOnly()) {
+        if ([tweet.text containsString:us_state]) {
+            tweet.state = us_state;
+            return us_state;
         }
     }
     return nil;
@@ -346,16 +329,14 @@ static PoliticalTweetStream *_stream;
     NSArray *usr = @[tweet.username];
 
     if (([usr filteredArrayUsingPredicate:self.democratPredicate].count) > 0) {
-//        tweet.partyIntent = PartyDemocrat;
+        tweet.partySource = PartyDemocrat;
         return PartyDemocrat;
     } else if (([usr filteredArrayUsingPredicate:self.republicanPredicate].count) > 0) {
-//        tweet.partyIntent = PartyRepublican;
+        tweet.partySource = PartyRepublican;
         return PartyRepublican;
     }
     
-//    tweet.partyIntent = PartyOther;
-//    return PartyOther;
-
+    tweet.partySource = PartyOther;
     return PartyOther;
 }
 
@@ -385,6 +366,7 @@ static PoliticalTweetStream *_stream;
         PoliticalTweet *tweet = [[PoliticalTweet alloc] initTweetWithDict:status];
         tweet.partyIntent = [self possiblePartyIntentFromTweet:tweet];
         tweet.partySource = [self possiblePartySourceFromTweet:tweet];
+        tweet.state = [self possibleStateFromTweet:tweet];
         [mut_arr addObject:tweet];
     }
     [[DataStore sharedStore] batchSaveTweetMessages:mut_arr];

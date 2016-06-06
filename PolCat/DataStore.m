@@ -29,7 +29,7 @@
     dispatch_once(&onceToken, ^{
         _sharedClient = [[DataStore alloc] init];
         _sharedClient.saveQueue = dispatch_queue_create("com.polcat.datastore.tweet_queue", DISPATCH_QUEUE_SERIAL);
-        NSLog(@"Created %@ singleton", [self class]);
+//        NSLog(@"Created %@ singleton", [self class]);
     });
     
     return _sharedClient;

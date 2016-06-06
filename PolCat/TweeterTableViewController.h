@@ -1,6 +1,6 @@
 //
-//  ViewController.h
-//  GraceNote
+//  TweeterTableViewController.h
+//  PolCat
 //
 //  Created by Martin Stoufer on 5/17/16.
 //  Copyright © 2016 Martin Stoufer. All rights reserved.

@@ -118,9 +118,7 @@
         };
         
         destination.streamCompletionBlock = streamCompletionBlock;
-        destination.tweetStream = [PoliticalTweetStream sharedStream];
         // This should come from some external source.
-        destination.tweetStream.usernames = @[@"barackobama", @"hillaryclinton", @"berniesanders", @"realdonaldtrump"];
         [[Filters sharedFilters] setStates:statesOnly()];
         
         [[Filters sharedFilters] setParties:@[stringForPartyEnum(PartyDemocrat),
@@ -130,6 +128,9 @@
         [[Filters sharedFilters] setKeywords:@[@"Hillary", @"Clinton", @"Bernie", @"Sanders", @"Barack", @"Obama", @"Democrat", @"berniesanders", @"barackobama", @"hillaryclinton"] forParty:PartyDemocrat];
         [[Filters sharedFilters] setKeywords:@[@"Donald", @"Trump", @"Republican", @"realdonaldtrump"]
                                                 forParty:PartyRepublican];
+        
+        destination.tweetStream = [PoliticalTweetStream sharedStream];
+        destination.tweetStream.usernames = @[@"barackobama", @"hillaryclinton", @"berniesanders", @"realdonaldtrump"];
     }
     // If the segue is push on the OAuth webview, just keep track of the view controller so we can tell it
     //  to trigger its unwind segue. This is due to the callback nature of the authorization process.

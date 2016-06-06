@@ -10,7 +10,7 @@ Before you build and run the app, just do a quick
 `pod install`
 in the top level project directory. That will get you all ready to go.
 
-Desgin Considerations
+Design Considerations
 ===
 Since we are pulling images from two disperate APIs, the driving goal was to keep each loading sequence as isolated as possible and only once they are available and cached are they presented in the UI.
 
