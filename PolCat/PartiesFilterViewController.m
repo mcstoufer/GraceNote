@@ -37,18 +37,17 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self saveState];
+}
+
+-(void)saveState
+{
     if (self.touched) {
         [[Filters sharedFilters] updateSelectedParties:@{stringForPartyEnum(PartyDemocrat): @(self.dSwitch.on),
                                                          stringForPartyEnum(PartyRepublican): @(self.rSwitch.on),
                                                          stringForPartyEnum(PartyOther): @(self.oSwitch.on)}];
         self.touched = NO;
     }
-    
-}
-
--(IBAction)handleUnwindAction:(id)sender
-{
-    [self.parent handleUnwindAction:self];
 }
 
 -(IBAction)handlePartySwitchAction:(id)sender

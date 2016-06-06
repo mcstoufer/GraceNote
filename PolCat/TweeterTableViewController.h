@@ -17,5 +17,7 @@ typedef void(^TweetStreamCompletionBlock)(BOOL complete);
 @property (nonatomic, strong) TweetStream* tweetStream;
 @property (nonatomic, strong) TweetStreamCompletionBlock streamCompletionBlock;
 
+-(void)updateFetchedResultsFromFilterChange;
+
 @end
 

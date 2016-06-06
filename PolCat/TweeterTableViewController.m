@@ -12,6 +12,8 @@
 #import "DataStore.h"
 #import "Filters.h"
 
+#define FRC_CACHE @"TweetMessages"
+
 @interface TweeterTableViewController () <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) UIRefreshControl *refresh;
@@ -32,7 +34,7 @@
     [self.tableView addSubview:self.refreshControl];
     [self.refreshControl addTarget:self action:@selector(refreshTable)
                   forControlEvents:UIControlEventValueChanged];
-    [NSFetchedResultsController deleteCacheWithName:@"TweetMessages"];
+    [NSFetchedResultsController deleteCacheWithName:FRC_CACHE];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleBackgroundNotification:)
                                                  name:UIApplicationWillResignActiveNotification
@@ -173,18 +175,30 @@
     _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                     managedObjectContext:dataStore.mainUIManagedObjectContext
                                                                       sectionNameKeyPath:nil
-                                                                               cacheName:@"TweetMessages"];
+                                                                               cacheName:FRC_CACHE];
     _fetchedResultsController.delegate = self;
     
     NSError *error = nil;
     if (![_fetchedResultsController performFetch:&error]) {
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"FRC lookup error %@\n%@", error.localizedDescription, [error userInfo]);
+        NSLog(@"FRC lookup error: %@\n%@", error.localizedDescription, [error userInfo]);
         //abort();
     }
-//    NSLog(@"Setup FRC");
     return _fetchedResultsController;
+}
+
+-(void)updateFetchedResultsFromFilterChange
+{
+    [NSFetchedResultsController deleteCacheWithName:FRC_CACHE];
+    [self.fetchedResultsController.fetchRequest setPredicate:[[Filters sharedFilters] filteredPredicate]];
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        NSLog(@"FRC updated filter re-fetch error: %@\n%@", error.localizedDescription, [error userInfo]);
+        abort();
+    }
+    [self.tableView reloadData];
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {

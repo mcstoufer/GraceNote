@@ -14,4 +14,7 @@
 @property (nonatomic, assign) BOOL touched;
 @property (nonatomic, weak) FeedFilterViewController *parent;
 
+-(IBAction)handleUnwindAction:(id)sender;
+-(void)saveState;
+
 @end

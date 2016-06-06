@@ -12,7 +12,12 @@
 
 -(IBAction)handleUnwindAction:(id)sender
 {
+    [self saveState];
     [self.parent handleUnwindAction:self];
 }
 
+-(void)saveState
+{
+    // No-op
+}
 @end

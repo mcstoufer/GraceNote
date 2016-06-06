@@ -44,6 +44,15 @@
     }
 }
 
+-(void)saveState
+{
+    if (self.touched) {
+        [[Filters sharedFilters] updateKeywords:self.keywordsDict[@"Democrat"] forParty:PartyDemocrat];
+        [[Filters sharedFilters] updateKeywords:self.keywordsDict[@"Republican"] forParty:PartyRepublican];
+        self.touched = NO;
+    }
+}
+
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return [self.keywordsDict allKeys].count;

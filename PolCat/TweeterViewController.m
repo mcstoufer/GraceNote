@@ -145,7 +145,7 @@
  *  @param segue The unwind segue
  */
 -(IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {
-    
+    [self.tableViewCtlr updateFetchedResultsFromFilterChange];
 }
 
 -(IBAction)handleFilterBarButtonAction:(id)sender

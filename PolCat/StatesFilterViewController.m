@@ -32,6 +32,11 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self saveState];
+}
+
+-(void)saveState
+{
     if (self.touched) {
         [[Filters sharedFilters] updateStates:self.stateDict];
         self.touched = NO;
