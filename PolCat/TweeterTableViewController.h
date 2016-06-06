@@ -12,7 +12,7 @@
 
 typedef void(^TweetStreamCompletionBlock)(BOOL complete);
 
-@interface TweeterTableViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate> : UITableViewController
+@interface TweeterTableViewController <UITableViewDelegate, UITableViewDataSource> : UITableViewController
 
 @property (nonatomic, strong) TweetStream* tweetStream;
 @property (nonatomic, strong) TweetStreamCompletionBlock streamCompletionBlock;

@@ -12,7 +12,7 @@
 #import "DataStore.h"
 #import "Filters.h"
 
-@interface TweeterTableViewController ()
+@interface TweeterTableViewController () <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) UIRefreshControl *refresh;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -25,8 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    self.tableView.delegate = nil;
+    self.tableView.dataSource = nil;
     
     self.refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:self.refreshControl];
@@ -37,6 +37,7 @@
                                              selector:@selector(handleBackgroundNotification:)
                                                  name:UIApplicationWillResignActiveNotification
                                                object:nil];
+//    (void)self.fetchedResultsController;
     [self dispatchTableViewLoad];
 }
 
@@ -78,7 +79,7 @@
         [self.tweetStream loadTweetsForStreamWithCompletion:^(BOOL complete, NSUInteger count, UIBackgroundFetchResult result) {
             // TODO: How to handle when the timeout to fetch all the tweets fires and return NO here?
             // Refire off loading, display alert message?
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)),dispatch_get_main_queue(), ^{
                 
                 if (self.streamCompletionBlock) {
                     self.streamCompletionBlock(complete);
@@ -86,6 +87,10 @@
                 }
                 
                 [self.refreshControl endRefreshing];
+                (void)self.fetchedResultsController;
+                self.tableView.delegate = self;
+                self.tableView.dataSource = self;
+                [self.tableView reloadData];
             });
         }];
     });
@@ -97,7 +102,7 @@
 }
 
 - (void)configureCell:(TweeterTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    TweetMessage *tweetMessage  = [_fetchedResultsController objectAtIndexPath:indexPath];
+    TweetMessage *tweetMessage  = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell configureCellWithTweetMessage:tweetMessage];
 }
 
@@ -151,7 +156,7 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"TweetMessage"
-                                              inManagedObjectContext:dataStore.managedObjectContext];
+                                              inManagedObjectContext:dataStore.mainUIManagedObjectContext];
     [fetchRequest setEntity:entity];
     
     // Set the batch size to a suitable number.
@@ -170,7 +175,7 @@
                                                                     managedObjectContext:dataStore.mainUIManagedObjectContext
                                                                       sectionNameKeyPath:nil
                                                                                cacheName:@"TweetMessages"];
-    _fetchedResultsController.delegate = (id)self;
+    _fetchedResultsController.delegate = self;
     
     NSError *error = nil;
     if (![_fetchedResultsController performFetch:&error]) {
@@ -179,7 +184,7 @@
         NSLog(@"FRC lookup error %@\n%@", error.localizedDescription, [error userInfo]);
         //abort();
     }
-    
+//    NSLog(@"Setup FRC");
     return _fetchedResultsController;
 }
 

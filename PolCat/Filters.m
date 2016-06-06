@@ -44,7 +44,7 @@
     NSMutableArray *filterPredicates = [NSMutableArray array];
     [filterPredicates addObject:[NSPredicate predicateWithFormat:@"NOT (us_state IN %@)",
                                  [self excludedStates]]];
-    [filterPredicates addObject:[NSPredicate predicateWithFormat:@"NOT (party in %@)",
+    [filterPredicates addObject:[NSPredicate predicateWithFormat:@"NOT (partySource in %@)",
                                  [self excludedParties]]];
     
     NSCompoundPredicate *compoundFilterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:filterPredicates];

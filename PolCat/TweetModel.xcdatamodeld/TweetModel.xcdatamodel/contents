@@ -21,10 +21,11 @@
                 <index value="us_state"/>
                 <index value="username"/>
                 <index value="partyIntent"/>
+                <index value="date"/>
             </compoundIndex>
         </compoundIndexes>
     </entity>
     <elements>
-        <element name="TweetMessage" positionX="630" positionY="2384" width="135" height="253"/>
+        <element name="TweetMessage" positionX="630" positionY="2384" width="135" height="255"/>
     </elements>
 </model>
